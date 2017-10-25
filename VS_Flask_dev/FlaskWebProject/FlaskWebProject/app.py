@@ -1,5 +1,5 @@
 
-from flask import Flask, template_rendered
+from flask import Flask, render_template
 
 ## Instance of flask class
 app = Flask(__name__)
@@ -12,8 +12,8 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    """Renders a sample page."""
-    return "Hello World!"
+    
+    return render_template('index.html')
 
 
 
