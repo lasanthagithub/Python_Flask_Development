@@ -27,8 +27,13 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="app.py" />
+    <Compile Include="templates\data.py">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="templates\about.html" />
+    <Content Include="templates\article.html" />
     <Content Include="templates\includes\_navbar.html" />
     <Content Include="requirements.txt" />
     <Content Include="static\content\bootstrap.css" />
