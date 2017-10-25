@@ -1,4 +1,4 @@
-from flask import Flask, template_rendered
+from flask import Flask
 
 
 ## Instance of flask class
