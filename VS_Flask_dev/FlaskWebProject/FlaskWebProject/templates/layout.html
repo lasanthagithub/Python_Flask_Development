@@ -4,8 +4,17 @@
 <head>
     <meta charset="utf-8" />
     <title>MyFlaskApp</title>
+    <link href="../static/content/bootstrap.min.css" rel="stylesheet" />
 </head>
 <body>
-    {% block body%} {% endblock %}
+
+    {% include 'includes/_navbar.html' %}
+    <div class="container">
+        {% block body%} {% endblock %}
+    </div>
+    
+
+    
+    <script src="../static/scripts/bootstrap.min.js"></script>    
 </body>
 </html>
