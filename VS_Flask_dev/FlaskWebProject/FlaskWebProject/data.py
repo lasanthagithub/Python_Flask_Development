@@ -1,4 +1,4 @@
-def article:
+def Articles():
     articles = [
             {
                 'id' : 1,
@@ -22,7 +22,6 @@ def article:
                 'body'  : 'Some information about the article 3',
                 'Author'    : 'Lasantha Rathnayake',
                 'create_date'    : '10/25/2017'
-            },
-            
+            }            
         ]
     return articles

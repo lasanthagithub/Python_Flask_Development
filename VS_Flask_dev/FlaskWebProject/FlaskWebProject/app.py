@@ -5,6 +5,7 @@ from data import Articles
 ## Instance of flask class
 app = Flask(__name__)
 
+Articles = Articles()
 #debug=True ## here or below. need to remoce when production
 
 ## Make the WSGI interface available at the top level so wfastcgi can get it.
@@ -19,6 +20,11 @@ def index():
 @app.route('/about')
 def about():
     return render_template('about.html')
+
+@app.route('/articles')
+def articles():
+    return render_template('articles.html', articles = Articles)
+
 
 if __name__ == '__main__':
     #import os
