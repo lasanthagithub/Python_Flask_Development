@@ -25,6 +25,12 @@ def about():
 def articles():
     return render_template('articles.html', articles = Articles)
 
+@app.route("/article/<string:id>/")
+def article(id):
+    #id = str(5)
+    return render_template('article.html', id=id)
+    # /<string:id>/
+
 
 if __name__ == '__main__':
     #import os
