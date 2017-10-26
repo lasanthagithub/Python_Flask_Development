@@ -1,6 +1,9 @@
 
-from flask import Flask, render_template
+from flask import Flask, render_template, flash, url_for, logging, session
 from data import Articles
+from flask_mysqldb import MySQL
+from wtforms import Form, StringField, PasswordField, validators
+from passlib.hash import sha256_crypt
 
 ## Instance of flask class
 app = Flask(__name__)
@@ -27,9 +30,8 @@ def articles():
 
 @app.route("/article/<string:id>/")
 def article(id):
-    #id = str(5)
-    return render_template('article.html', id=id)
-    # /<string:id>/
+   return render_template('article.html', id=id)
+    
 
 
 if __name__ == '__main__':
