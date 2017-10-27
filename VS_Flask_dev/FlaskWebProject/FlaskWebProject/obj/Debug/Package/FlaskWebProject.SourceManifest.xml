@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<sitemanifest>
+  <IisApp path="F:\One_drive_Gmail\OneDrive\My_Projets_Git\Python_webDevelopment\Flask_dev\VS_Flask_dev\FlaskWebProject\FlaskWebProject\obj\Debug\Package\PackageTmp" managedRuntimeVersion="v4.0" />
+  <setAcl path="F:\One_drive_Gmail\OneDrive\My_Projets_Git\Python_webDevelopment\Flask_dev\VS_Flask_dev\FlaskWebProject\FlaskWebProject\obj\Debug\Package\PackageTmp" setAclResourceType="Directory" />
+  <setAcl path="F:\One_drive_Gmail\OneDrive\My_Projets_Git\Python_webDevelopment\Flask_dev\VS_Flask_dev\FlaskWebProject\FlaskWebProject\obj\Debug\Package\PackageTmp" setAclUser="anonymousAuthenticationUser" setAclResourceType="Directory" />
+</sitemanifest>
