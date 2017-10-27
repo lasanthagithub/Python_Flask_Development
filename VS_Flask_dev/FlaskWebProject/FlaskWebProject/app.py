@@ -1,5 +1,5 @@
 
-from flask import Flask, render_template, flash, url_for, logging, session, request
+from flask import Flask, render_template, flash, url_for, logging, session, request, redirect
 from data import Articles
 from flask_mysqldb import MySQL
 from wtforms import Form, StringField, PasswordField, validators
@@ -11,7 +11,7 @@ app = Flask(__name__)
 ## Congigure MySQL
 app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = '123456'
+app.config['MYSQL_PASSWORD'] = 'america1200'
 app.config['MYSQL_DB'] = 'python_flask'
 app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
 
@@ -69,6 +69,7 @@ def register():
         ## Create a curser
         cur = mysql.connection.cursor()
 
+        ## Execute quarry
         cur.execute("INSERT INTO users(name, email, username, password) VALUES(%s, %s, %s, %s)", 
                     (name, email, username, password))
 
@@ -79,12 +80,8 @@ def register():
         cur.close()
 
         flash('Your are now registered and can log in', 'Success')
-        redirect(url_for('index'))
+        return redirect(url_for('index'))
 
-
-
-
-        return render_template('register.html')
     return render_template('register.html', form=form)
 
 
@@ -97,4 +94,5 @@ if __name__ == '__main__':
     #except ValueError:
     #    PORT = 5555
     #app.run(HOST, PORT)
+    app.secret_key = 'secret123'
     app.run(debug=True)
