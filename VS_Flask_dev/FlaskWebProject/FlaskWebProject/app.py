@@ -4,6 +4,7 @@ from data import Articles
 from flask_mysqldb import MySQL
 from wtforms import Form, StringField, PasswordField, validators
 from passlib.hash import sha256_crypt
+from functools import wraps
 #from data import DatabaseCon
 
 ## Instance of flask class
@@ -132,10 +133,35 @@ def login():
     return render_template('login.html')
 
 
+
+
+## Check if user logged in. 
+## When use this function, the particular action is only allowed if logged in
+def is_logged_in(f):
+    @wrap(f)
+    def wrap(*args, **kwargs)
+    if 'logged_in' in session:
+        return f(*args, **kwargs)
+    else:
+        flash('Unauthorized, Please login', 'danger')
+        return redirect(url_for('login'))
+    return wrap
+
+
 ## Dashboard
 @app.route('/dashboard')
+@is_logged_in
 def dashboard():
     return render_template('dashboard.html')
+
+
+## Log out
+@app.route('/logout')
+def logput():
+    session.clear()
+    flash('You are now logged out', 'success')
+    return redirect(url_for('login'))
+
 
 
 if __name__ == '__main__':
