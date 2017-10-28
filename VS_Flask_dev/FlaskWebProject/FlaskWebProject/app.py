@@ -2,7 +2,7 @@
 from flask import Flask, render_template, flash, url_for, logging, session, request, redirect
 from data import Articles
 from flask_mysqldb import MySQL
-from wtforms import Form, StringField, PasswordField, validators
+from wtforms import Form, StringField, PasswordField, validators, TextAreaField
 from passlib.hash import sha256_crypt
 from functools import wraps
 #from data import DatabaseCon
@@ -159,7 +159,7 @@ def dashboard():
 ## Articles Form class
 ## Defining WTForm class
 class ArticlerForm(Form): ## object is request.form type
-    name = StringField('Name', [validators.Length(min=1, max=200)])
+    title = StringField('Title', [validators.Length(min=1, max=200)])
     body = TextAreaField('Body', [validators.Length(min=30)])
 
 
@@ -169,13 +169,33 @@ class ArticlerForm(Form): ## object is request.form type
 def add_article():
     form = ArticlerForm(request.form)
     if request.method == 'POST' and form.validate():
+        title = form.title.data
+        body = form.body.data
+
+        ## Create cursor
+        cur = mysql.connection.cursor()
+
+        ## Execute
+        cur.execute("INSERT INTO articles(title, body, author) VALUES(%s, %s, %s)", 
+                    (title, body, session['username']))
+
+        ## Commit to DB
+        mysql.connection.commit()
+
+        ## Close connection
+        cur.close()
+
+        flash('Article Created', 'success')
+
+        return redirect(url_for('dashboard'))
+    return render_template('add_article', form=form)
 
 
 
 ## Log out
 @app.route('/logout')
-def logput():
-    @is_logged_in
+@is_logged_in
+def logput():   
     session.clear()
     flash('You are now logged out', 'success')
     return redirect(url_for('login'))
