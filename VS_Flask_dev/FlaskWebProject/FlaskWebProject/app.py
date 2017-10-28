@@ -29,20 +29,24 @@ Articles = Articles()
 ## Make the WSGI interface available at the top level so wfastcgi can get it.
 #wsgi_app = app.wsgi_app
 
-
+## Root or Home or Index page
 @app.route('/')
-def index():
-    
+def index():    
     return render_template('home.html')
 
+
+## About page
 @app.route('/about')
 def about():
     return render_template('about.html')
 
+
+## Articles page
 @app.route('/articles')
 def articles():
     return render_template('articles.html', articles = Articles)
 
+## Get individual items
 @app.route('/article/<string:id>/')
 def article(id):
    return render_template('article.html', id=id)
@@ -58,6 +62,9 @@ class RegisterForm(Form): ## object is request.form type
         validators.EqualTo('confirm', message='Password do not match')])
     confirm = PasswordField('Confirm Password')
 
+
+
+## New user registration
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     form = RegisterForm(request.form)  ## creating an object instance from RegisterForm class
@@ -107,19 +114,28 @@ def login():
 
             ## compare passwords
             if sha256_crypt.verify(password_candidate, password):
-                app.logger.info('PASSWORD MATCHED')
+                ## if passed create a session
+                session['logged_in'] = True
+                session['username'] = username
+
+                flash('You are now logged in', 'success')
+                return redirect(url_for('dashboard'))
             else:
                 error = 'Invalid login'
-                render_template('login.html', error)
+                return render_template('login.html', error=error)
+            ## close connection
+            cur.close()
         else:
             error = 'Username not found'
-            render_template('login.html', error)
+            return render_template('login.html', error=error)
 
     return render_template('login.html')
 
 
-
-
+## Dashboard
+@app.route('/dashboard')
+def dashboard():
+    return render_template('dashboard.html')
 
 
 if __name__ == '__main__':

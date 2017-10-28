@@ -37,6 +37,7 @@
   <ItemGroup>
     <Content Include="templates\about.html" />
     <Content Include="templates\article.html" />
+    <Content Include="templates\dashboard.html" />
     <Content Include="templates\includes\_formhelpers.html" />
     <Content Include="templates\includes\_messages.html" />
     <Content Include="templates\includes\_navbar.html" />
