@@ -175,6 +175,10 @@ def add_article():
         ## Create cursor
         cur = mysql.connection.cursor()
 
+        ## SQL codes for creating a table
+        ### CREATE TABLE articles (id INT(11) PRIMARY KEY auto_increment, title varchar(255), 
+        #author varchar(100), body text, create_date timestamp default current_timestamp);
+        
         ## Execute
         cur.execute("INSERT INTO articles(title, body, author) VALUES(%s, %s, %s)", 
                     (title, body, session['username']))
@@ -188,7 +192,7 @@ def add_article():
         flash('Article Created', 'success')
 
         return redirect(url_for('dashboard'))
-    return render_template('add_article', form=form)
+    return render_template('add_article.html', form=form)
 
 
 
