@@ -30,6 +30,9 @@
     <Compile Include="data.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Data\DatabaseCon.py">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="templates\about.html" />
@@ -48,6 +51,7 @@
     <Content Include="static\scripts\bootstrap.js" />
     <Content Include="static\scripts\bootstrap.min.js" />
     <Content Include="templates\articles.html" />
+    <Content Include="templates\login.html" />
     <Content Include="templates\register.html" />
     <None Include="static\scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="static\scripts\jquery-1.10.2.js" />
@@ -66,6 +70,7 @@
     <Content Include="templates\layout.html" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="data\" />
     <Folder Include="templates\includes\" />
     <Folder Include="static\" />
     <Folder Include="static\content\" />

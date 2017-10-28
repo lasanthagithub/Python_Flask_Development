@@ -4,6 +4,7 @@ from data import Articles
 from flask_mysqldb import MySQL
 from wtforms import Form, StringField, PasswordField, validators
 from passlib.hash import sha256_crypt
+#from data import DatabaseCon
 
 ## Instance of flask class
 app = Flask(__name__)
@@ -16,8 +17,8 @@ app.config['MYSQL_DB'] = 'python_flask'
 app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
 
 ## Initilize MySQL
+#mysql = DatabaseCon(app)
 mysql = MySQL(app)
-
 
 
 
@@ -83,6 +84,37 @@ def register():
         return redirect(url_for('index'))
 
     return render_template('register.html', form=form)
+
+
+# User login
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        ## Get form fields
+        username = request.form['username']
+        password_candidate = request.form['password']
+
+        ## Create a curser
+        cur = mysql.connection.cursor()
+
+        ## Get user by user name
+        result = cur.execute("SELECT * FROM users WHERE username = %s", [username])
+
+        if result > 0:
+            ## Get stored hash
+            data = cur.fetchone()
+            password = data['password']
+
+            ## compare passwords
+            if sha256_crypt.verify(password_candidate, password):
+                app.logger.info('PASSWORD MATCHED')
+        else:
+            app.logger.info('NO USER')
+
+    return render_template('login.html')
+
+
+
 
 
 
