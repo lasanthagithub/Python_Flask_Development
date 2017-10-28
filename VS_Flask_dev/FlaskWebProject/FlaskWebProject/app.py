@@ -138,13 +138,13 @@ def login():
 ## Check if user logged in. 
 ## When use this function, the particular action is only allowed if logged in
 def is_logged_in(f):
-    @wrap(f)
-    def wrap(*args, **kwargs)
-    if 'logged_in' in session:
-        return f(*args, **kwargs)
-    else:
-        flash('Unauthorized, Please login', 'danger')
-        return redirect(url_for('login'))
+    @wraps(f)
+    def wrap(*args, **kwargs):
+        if 'logged_in' in session:
+            return f(*args, **kwargs)
+        else:
+            flash('Unauthorized, Please login', 'danger')
+            return redirect(url_for('login'))
     return wrap
 
 
