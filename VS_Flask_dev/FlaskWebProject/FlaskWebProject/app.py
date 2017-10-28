@@ -53,6 +53,7 @@ def article(id):
    return render_template('article.html', id=id)
     
 
+## Registration Form
 ## Defining WTForm class
 class RegisterForm(Form): ## object is request.form type
     name = StringField('Name', [validators.Length(min=1, max=50)])
@@ -155,9 +156,26 @@ def dashboard():
     return render_template('dashboard.html')
 
 
+## Articles Form class
+## Defining WTForm class
+class ArticlerForm(Form): ## object is request.form type
+    name = StringField('Name', [validators.Length(min=1, max=200)])
+    body = TextAreaField('Body', [validators.Length(min=30)])
+
+
+## ADD article
+@app.route('/add_article', methods=['GET', 'POST'])
+@is_logged_in
+def add_article():
+    form = ArticlerForm(request.form)
+    if request.method == 'POST' and form.validate():
+
+
+
 ## Log out
 @app.route('/logout')
 def logput():
+    @is_logged_in
     session.clear()
     flash('You are now logged out', 'success')
     return redirect(url_for('login'))
