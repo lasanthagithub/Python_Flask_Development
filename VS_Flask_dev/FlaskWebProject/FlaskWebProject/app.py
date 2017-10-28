@@ -237,6 +237,43 @@ def add_article():
     return render_template('add_article.html', form=form)
 
 
+## Edit article
+@app.route('/edit_article/<string:id>/', methods=['GET', 'POST'])
+@is_logged_in
+def edit_article(id):
+    ## Create cursor
+    cur = mysql.connection.cursor()
+
+    ## Get article by id
+    result = cur.execute('SELECT * FROM articles WHERE id = %s', [id])
+    article = cur.fetchone()
+
+    form = ArticlerForm(request.form)
+
+    ## Populate article from fields
+    form.title.data = article['title']
+    form.body.data = article['body']
+
+    if request.method == 'POST' and form.validate():
+        title = request.form['title']
+        body = request.form['body']
+        
+        ## Execute
+        cur.execute("UPDATE articles SET title = %s, body = %s WHERE id = %s", 
+                    (title, body, id))
+
+        ## Commit to DB
+        mysql.connection.commit()
+
+        ## Close connection
+        cur.close()
+
+        flash('Article Edited', 'success')
+
+        return redirect(url_for('dashboard'))
+    return render_template('edit_article.html', form=form)
+
+
 
 ## Log out
 @app.route('/logout')
