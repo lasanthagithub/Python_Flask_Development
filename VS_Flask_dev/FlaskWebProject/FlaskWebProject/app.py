@@ -1,6 +1,6 @@
 
 from flask import Flask, render_template, flash, url_for, logging, session, request, redirect
-from data import Articles
+#from data import Articles
 from flask_mysqldb import MySQL
 from wtforms import Form, StringField, PasswordField, validators, TextAreaField
 from passlib.hash import sha256_crypt
@@ -21,10 +21,9 @@ app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
 #mysql = DatabaseCon(app)
 mysql = MySQL(app)
 
+#Articles = Articles()
 
 
-
-Articles = Articles()
 #debug=True ## here or below. need to remoce when production
 
 ## Make the WSGI interface available at the top level so wfastcgi can get it.
@@ -45,12 +44,37 @@ def about():
 ## Articles page
 @app.route('/articles')
 def articles():
-    return render_template('articles.html', articles = Articles)
+    ## Create cursor
+    cur = mysql.connection.cursor()
+
+    ## Get articles
+    result = cur.execute("SELECT * FROM articles")
+
+    articles = cur.fetchall() ## get all the articles to a dictionary list
+
+    if result > 0:
+        return render_template('articles.html', articles=articles)
+    else:
+        msg = 'No articles found'
+        return render_template('articles.html', msg=msg)
+    cur.close()
+
+
+
+
 
 ## Get individual items
 @app.route('/article/<string:id>/')
 def article(id):
-   return render_template('article.html', id=id)
+    ## Create cursor
+    cur = mysql.connection.cursor()
+
+    ## Get articles
+    result = cur.execute("SELECT * FROM articles WHERE id = %s", [id])
+
+    article = cur.fetchone() ## get one article
+
+    return render_template('article.html', article=article)
     
 
 ## Registration Form
@@ -153,7 +177,25 @@ def is_logged_in(f):
 @app.route('/dashboard')
 @is_logged_in
 def dashboard():
-    return render_template('dashboard.html')
+    ## Create cursor
+    cur = mysql.connection.cursor()
+
+    ## Get articles
+    result = cur.execute("SELECT * FROM articles")
+
+    articles = cur.fetchall() ## get all the articles to a dictionary
+
+    if result > 0:
+        return render_template('dashboard.html', articles=articles)
+    else:
+        msg = 'No articles found'
+        return render_template('dashboard.html', msg=msg)
+    cur.close()
+
+
+
+
+
 
 
 ## Articles Form class
