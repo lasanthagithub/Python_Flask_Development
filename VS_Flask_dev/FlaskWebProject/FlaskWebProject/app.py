@@ -1,3 +1,13 @@
+'''This program is working. But improvements are going on for followings
+    ## TODO
+    ## Add a layer to only allow to delete own content
+    ## Display a conformation messege before deletion completion
+    ## Prevent users from registering several accounts
+    ## Prevent duplications
+    ## Break app.py to several modules for diffrent tasks
+
+'''
+
 
 from flask import Flask, render_template, flash, url_for, logging, session, request, redirect
 #from data import Articles
