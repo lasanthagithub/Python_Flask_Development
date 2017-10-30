@@ -273,6 +273,11 @@ def edit_article(id):
         return redirect(url_for('dashboard'))
     return render_template('edit_article.html', form=form)
 
+## Delete articla
+@app.route('/delete_article/<string:id>/')
+@is_logged_in
+def delete_article(id):
+
 
 
 ## Log out
