@@ -1,0 +1,17 @@
+﻿body {
+}
+.jumbotron{
+    background-color:#2E2D88;
+    color:white;
+}
+
+.tab-content {
+    border-left: 1px #ddd;
+    border-right: 1px #ddd;
+    border-bottom: 1px #ddd;
+    padding: 10px;
+}
+
+.nav-tabs{
+    margin-bottom: 0;
+}
