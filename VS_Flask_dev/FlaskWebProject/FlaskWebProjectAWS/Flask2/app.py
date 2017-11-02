@@ -8,7 +8,7 @@
 
 '''
 
-
+import gc
 from flask import Flask, render_template, flash, url_for, logging, session, request, redirect
 #from data import Articles
 #from flask_mysqldb import MySQL
@@ -17,26 +17,40 @@ from passlib.hash import sha256_crypt
 from functools import wraps
 #from data import DatabaseCon
 
-from dbconnect import connection
+#from dbconnect import connection
 from MySQLdb import escape_string as thwart
-
+from flask.ext.mysql import MySQL
 ## Instance of flask class
 app = Flask(__name__)
 
-"""
+
+
 ## Congigure MySQL
+mysql = MySQL()
+'''
 app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = 'america1200'
+app.config['MYSQL_PASSWORD'] = 'america'
 app.config['MYSQL_DB'] = 'python_flask'
 app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
+'''
+'''
+app.config['MYSQL_DATABASE_HOST'] = 'localhost'
+app.config['MYSQL_DATABASE_USER'] = 'root'
+app.config['MYSQL_DATABASE_PASSWORD'] = 'america'
+app.config['MYSQL_DATABASE_DB'] = 'python_flask'
+#app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
 
+mysql.init_app(app)
+'''
+#conn = mysql.connect()
+#cur = conn.cursor()
 ## Initilize MySQL
 #mysql = DatabaseCon(app)
 #mysql = MySQL(app)
 
 #Articles = Articles()
-
+"""
 
 #debug=True ## here or below. need to remoce when production
 
@@ -113,40 +127,23 @@ class RegisterForm(Form): ## object is request.form type
 ## New user registration
 @app.route('/register', methods=['GET', 'POST'])
 def register():
-    cur, conn = connection()
-    
-    
-
-    form = RegisterForm(request.form)  ## creating an object instance from RegisterForm class
-    
+    form = RegisterForm(request.form)  ## creating an object instance from RegisterForm class   
     
     if request.method == 'POST' and form.validate():
+        from dbhandle import register__
+        
         name = form.name.data
         email = form.email.data
         username = form.username.data
-        password = sha256_crypt.encrypt(str(form.password.data))
+        password = form.password.data
         
-        
-
-        ## Create a curser
-        #cur = mysql.connection.cursor()
-
-        ## Execute quarry
-        cur.execute("INSERT INTO users(name, email, username, password) VALUES(%s, %s, %s, %s)", 
-                    (name, email, username, password))
-
-
-        ## Comit to db
-        conn.commit()
-
-        ## Close connection
-        cur.close()
+        register__(name, email, username, password)
 
         flash('Your are now registered and can log in', 'Success')
-        return redirect(url_for('home'))
-        
+        return redirect(url_for('index'))
+        #return render_template('home.html')
     return render_template('register.html', form=form)
-"""	
+
 
 
 # User login
@@ -156,12 +153,14 @@ def login():
         ## Get form fields
         username = request.form['username']
         password_candidate = request.form['password']
-
-        ## Create a curser
-        cur = mysql.connection.cursor()
-
-        ## Get user by user name
-        result = cur.execute("SELECT * FROM users WHERE username = %s", [username])
+        try:
+            ## Create a curser
+            #cur = mysql.connection.cursor()
+            cur, conn = connection()
+            ## Get user by user name
+            result = cur.execute("SELECT * FROM users WHERE username = %s", [username])
+        except Exception as e:
+            return(str(e))
 
         if result > 0:
             ## Get stored hash
@@ -186,6 +185,7 @@ def login():
             return render_template('login.html', error=error)
 
     return render_template('login.html')
+    ## Check for the duplicates
 
 
 
@@ -201,7 +201,7 @@ def is_logged_in(f):
             flash('Unauthorized, Please login', 'danger')
             return redirect(url_for('login'))
     return wrap
-
+"""	
 
 ## Dashboard
 @app.route('/dashboard')
