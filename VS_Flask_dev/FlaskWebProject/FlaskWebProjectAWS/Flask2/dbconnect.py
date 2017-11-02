@@ -6,4 +6,4 @@ def connection():
 							passwd = "america",
 							db = "python_flask")
 	c = conn.cursor()
-	return c, con;
+	return c, conn;

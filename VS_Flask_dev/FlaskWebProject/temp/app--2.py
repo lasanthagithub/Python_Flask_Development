@@ -8,7 +8,7 @@
 
 '''
 
-
+import gc
 from flask import Flask, render_template, flash, url_for, logging, session, request, redirect
 #from data import Articles
 #from flask_mysqldb import MySQL
@@ -19,24 +19,35 @@ from functools import wraps
 
 from dbconnect import connection
 from MySQLdb import escape_string as thwart
-
+from flask.ext.mysql import MySQL
 ## Instance of flask class
 app = Flask(__name__)
 
-"""
+
 ## Congigure MySQL
+mysql = MySQL()
+'''
 app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = 'america1200'
+app.config['MYSQL_PASSWORD'] = 'america'
 app.config['MYSQL_DB'] = 'python_flask'
 app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
+'''
+app.config['MYSQL_DATABASE_HOST'] = 'localhost'
+app.config['MYSQL_DATABASE_USER'] = 'root'
+app.config['MYSQL_DATABASE_PASSWORD'] = 'america'
+app.config['MYSQL_DATABASE_DB'] = 'python_flask'
+#app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
 
+mysql.init_app(app)
+#conn = mysql.connect()
+#cur = conn.cursor()
 ## Initilize MySQL
 #mysql = DatabaseCon(app)
 #mysql = MySQL(app)
 
 #Articles = Articles()
-
+"""
 
 #debug=True ## here or below. need to remoce when production
 
@@ -113,14 +124,16 @@ class RegisterForm(Form): ## object is request.form type
 ## New user registration
 @app.route('/register', methods=['GET', 'POST'])
 def register():
-    cur, conn = connection()
-    
-    
+    #cur, conn = connection()
+
 
     form = RegisterForm(request.form)  ## creating an object instance from RegisterForm class
     
     
     if request.method == 'POST' and form.validate():
+
+        conn = mysql.connect()
+        cur = conn.cursor()
         name = form.name.data
         email = form.email.data
         username = form.username.data
@@ -134,17 +147,20 @@ def register():
         ## Execute quarry
         cur.execute("INSERT INTO users(name, email, username, password) VALUES(%s, %s, %s, %s)", 
                     (name, email, username, password))
-
+        '''
 
         ## Comit to db
         conn.commit()
 
         ## Close connection
         cur.close()
+        gc.collect()'''
 
         flash('Your are now registered and can log in', 'Success')
-        return redirect(url_for('home'))
-        
+        #flash(str(name), 'Success')
+        #return redirect(url_for('home'))
+        return render_template('home.html')
+        #return name + email + username + password
     return render_template('register.html', form=form)
 """	
 
