@@ -9,7 +9,7 @@
 
 '''
 
-
+import gc
 from flask import Flask, render_template, flash, url_for, logging, session, request, redirect
 #from data import Articles
 #from flask_mysqldb import MySQL
@@ -112,19 +112,18 @@ def register():
             username = form.username.data
             password = sha256_crypt.encrypt(str(form.password.data))
 
-            if int(dbhandle.get_user(username)) > 0:
-                a =1
-                #flash("The username is already tacken, please choose another")
-                #return render_template('register.html', form=form)
+            if dbhandle.is_user(username) > 0: ## return value is an integer
+                flash("The username is already tacken, please choose another.")
+                return render_template('register.html', form=form)
             else:
                 dbhandle.register__(name, email, username, password)
 
-                flash('Your are now registered and can log in', 'success')
+                flash('Your are now registered. Please log in', 'success')
                 return redirect(url_for('index'))
-        return render_template('register.html', form=form)        
-    except: #Exception as e:
-        a=2
-        #return(str(e))
+        return render_template('register.html', form=form)  
+    
+    except Exception as e:
+        return(str(e))
 
     
 
@@ -139,17 +138,16 @@ def login():
         password_candidate = request.form['password']
         try:
             ## Create a curser
-            #cur = mysql.connection.cursor()
-            cur, conn = connection()
             ## Get user by user name
-            result = cur.execute("SELECT * FROM users WHERE username = %s", [username])
+            result = dbhandle.get_user(username)
         except Exception as e:
             return(str(e))
 
-        if result > 0:
+        if len(result) > 0:
             ## Get stored hash
-            data = cur.fetchone()
-            password = data['password']
+            #data = cur.fetchone()
+            #password = data['password']
+            password = result[0][1]
 
             ## compare passwords
             if sha256_crypt.verify(password_candidate, password):
@@ -158,14 +156,17 @@ def login():
                 session['username'] = username
 
                 flash('You are now logged in', 'success')
-                return redirect(url_for('dashboard'))
+                #return redirect(url_for('dashboard'))
+                return redirect(url_for('index'))
             else:
                 error = 'Invalid login'
                 return render_template('login.html', error=error)
-            ## close connection
-            cur.close()
+            ### close connection
+            #cur.close()
+            #conn.close()
+            #gc.collect() 
         else:
-            error = 'Username not found'
+            error = 'Username not found. Please register!'
             return render_template('login.html', error=error)
 
     return render_template('login.html')

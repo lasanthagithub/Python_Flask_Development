@@ -9,11 +9,11 @@ def register__(name_, email_,username_, password_):
         cur, conn = connection()
    
         ## Execute quarry
-        '''cur.execute("INSERT INTO users(name, email, username, password) VALUES(%s, %s, %s, %s)", 
-                    (thwart(name_), thwart(email_), thwart(username_), thwart(password_)))'''
         cur.execute("INSERT INTO users(name, email, username, password) VALUES(%s, %s, %s, %s)",(thwart(name_), thwart(email_), thwart(username_), thwart(password_)))
+
         ## Comit to db
         conn.commit()
+
         ## Close connection
         cur.close()
         conn.close()
@@ -21,12 +21,33 @@ def register__(name_, email_,username_, password_):
 
 ## Get user info from the database
 def get_user(username_):
+
     ## Create a curser
-    cur, conn = connection()
-   
+    cur, conn = connection()  
+    
     ## Execute quarry
-    user = cur.execute("SELECT * FROM WHERE username = (%s)", (thwart(username_)))
+    user = cur.execute("SELECT username, password FROM users WHERE username = (%s)", (thwart(username_),)) ## Important ','
+    result = cur.fetchall()
+    ## Close connection
+    cur.close()
+    conn.close()
+    gc.collect()  
+    
+    return result #cur, conn, user
+
+
+## Check user
+def is_user(username_):
+
+    ## Create a curser
+    cur, conn = connection()  
+    
+    ## Execute quarry
+    user = cur.execute("SELECT * FROM users WHERE username = (%s)", (thwart(username_),)) ## Important ','
 
     ## Close connection
     cur.close()
+    conn.close()
+    gc.collect()  
+    
     return user
