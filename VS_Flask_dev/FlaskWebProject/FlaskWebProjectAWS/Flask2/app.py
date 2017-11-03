@@ -19,14 +19,14 @@ from functools import wraps
 
 #from dbconnect import connection
 from MySQLdb import escape_string as thwart
-from flask.ext.mysql import MySQL
+
 ## Instance of flask class
 app = Flask(__name__)
 
 
 
 ## Congigure MySQL
-mysql = MySQL()
+
 '''
 app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
@@ -201,6 +201,13 @@ def is_logged_in(f):
             flash('Unauthorized, Please login', 'danger')
             return redirect(url_for('login'))
     return wrap
+
+## Main analysis page
+@app.route('/analysis_main')
+def analysis_main():
+    return render_template('analysis_main.html')
+
+
 """	
 
 ## Dashboard
