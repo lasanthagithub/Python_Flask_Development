@@ -5,10 +5,11 @@
     ## Prevent users from registering several accounts
     ## Prevent duplications
     ## Break app.py to several modules for diffrent tasks
+    ## Add company to registration form
 
 '''
 
-import gc
+
 from flask import Flask, render_template, flash, url_for, logging, session, request, redirect
 #from data import Articles
 #from flask_mysqldb import MySQL
@@ -19,37 +20,12 @@ from functools import wraps
 
 #from dbconnect import connection
 from MySQLdb import escape_string as thwart
-
+import dbhandle
 ## Instance of flask class
 app = Flask(__name__)
 
 
 
-## Congigure MySQL
-
-'''
-app.config['MYSQL_HOST'] = 'localhost'
-app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = 'america'
-app.config['MYSQL_DB'] = 'python_flask'
-app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
-'''
-'''
-app.config['MYSQL_DATABASE_HOST'] = 'localhost'
-app.config['MYSQL_DATABASE_USER'] = 'root'
-app.config['MYSQL_DATABASE_PASSWORD'] = 'america'
-app.config['MYSQL_DATABASE_DB'] = 'python_flask'
-#app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
-
-mysql.init_app(app)
-'''
-#conn = mysql.connect()
-#cur = conn.cursor()
-## Initilize MySQL
-#mysql = DatabaseCon(app)
-#mysql = MySQL(app)
-
-#Articles = Articles()
 """
 
 #debug=True ## here or below. need to remoce when production
@@ -58,20 +34,20 @@ mysql.init_app(app)
 #wsgi_app = app.wsgi_app
 
 """
-
+#####################################################################################
 ## Root or Home or Index page
 @app.route('/')
 def index():
    
     return render_template('home.html')
 
-
+#####################################################################################
 ## About page
 @app.route('/about')
 def about():
     return render_template('about.html')
 
-
+#####################################################################################
 ## Articles page
 @app.route('/articles')
 def articles():
@@ -93,7 +69,7 @@ def articles():
 
 
 
-
+#####################################################################################
 ## Get individual items
 @app.route('/article/<string:id>/')
 def article(id):
@@ -107,7 +83,7 @@ def article(id):
 
     return render_template('article.html', article=article)
     
-
+#####################################################################################
 ## Registration Form
 ## Defining WTForm class
 class RegisterForm(Form): ## object is request.form type
@@ -118,34 +94,42 @@ class RegisterForm(Form): ## object is request.form type
         validators.DataRequired(),
         validators.EqualTo('confirm', message='Username/Password do not match')])
     confirm = PasswordField('Confirm Password')
-    '''accept_tos = BooleanField('I accept the <a href="#">Terms of Service and the\
-                     <a href="#">Privacy Notice. Last updater Oct 2017', 
-                     validators.DataRequired())'''
+    accept_tos = BooleanField('I accept the <a href="/tos">Terms of Service and the\
+                     <a href="/privacynotice">Privacy Notice. Last updater Oct 2017')#,                      validators.DataRequired()
 
 
-
+#####################################################################################
 ## New user registration
 @app.route('/register', methods=['GET', 'POST'])
 def register():
-    form = RegisterForm(request.form)  ## creating an object instance from RegisterForm class   
+    try:
+        form = RegisterForm(request.form)  ## creating an object instance from RegisterForm class   
     
-    if request.method == 'POST' and form.validate():
-        from dbhandle import register__
-        
-        name = form.name.data
-        email = form.email.data
-        username = form.username.data
-        password = form.password.data
-        
-        register__(name, email, username, password)
+        if request.method == 'POST' and form.validate():
+       
+            name = form.name.data
+            email = form.email.data
+            username = form.username.data
+            password = sha256_crypt.encrypt(str(form.password.data))
 
-        flash('Your are now registered and can log in', 'Success')
-        return redirect(url_for('index'))
-        #return render_template('home.html')
-    return render_template('register.html', form=form)
+            if int(dbhandle.get_user(username)) > 0:
+                a =1
+                #flash("The username is already tacken, please choose another")
+                #return render_template('register.html', form=form)
+            else:
+                dbhandle.register__(name, email, username, password)
+
+                flash('Your are now registered and can log in', 'success')
+                return redirect(url_for('index'))
+        return render_template('register.html', form=form)        
+    except: #Exception as e:
+        a=2
+        #return(str(e))
+
+    
 
 
-
+#####################################################################################
 # User login
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -189,7 +173,7 @@ def login():
 
 
 
-
+#####################################################################################
 ## Check if user logged in. 
 ## When use this function, the particular action is only allowed if logged in
 def is_logged_in(f):
@@ -209,7 +193,7 @@ def analysis_main():
 
 
 """	
-
+#####################################################################################
 ## Dashboard
 @app.route('/dashboard')
 @is_logged_in
@@ -234,14 +218,14 @@ def dashboard():
 
 
 
-
+#####################################################################################
 ## Articles Form class
 ## Defining WTForm class
 class ArticlerForm(Form): ## object is request.form type
     title = StringField('Title', [validators.Length(min=1, max=200)])
     body = TextAreaField('Body', [validators.Length(min=30)])
 
-
+#####################################################################################
 ## ADD article
 @app.route('/add_article', methods=['GET', 'POST'])
 @is_logged_in
@@ -273,7 +257,7 @@ def add_article():
         return redirect(url_for('dashboard'))
     return render_template('add_article.html', form=form)
 
-
+#####################################################################################
 ## Edit article
 @app.route('/edit_article/<string:id>/', methods=['GET', 'POST'])
 @is_logged_in
@@ -310,6 +294,7 @@ def edit_article(id):
         return redirect(url_for('dashboard'))
     return render_template('edit_article.html', form=form)
 
+#####################################################################################
 ## Delete articla
 @app.route('/delete_article/<string:id>/', methods = ['POST'])
 @is_logged_in
@@ -330,7 +315,7 @@ def delete_article(id):
     return redirect(url_for('dashboard'))
 
 
-
+#####################################################################################
 ## Log out
 @app.route('/logout')
 @is_logged_in
@@ -340,7 +325,7 @@ def logput():
     return redirect(url_for('login'))
 
 """
-
+#####################################################################################
 if __name__ == '__main__':
     #import os
     #HOST = os.environ.get('SERVER_HOST', 'localhost')

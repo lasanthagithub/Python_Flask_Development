@@ -1,6 +1,10 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\VS_Flask_dev",
+    "\\VS_Flask_dev\\FlaskWebProject",
+    "\\VS_Flask_dev\\FlaskWebProject\\FlaskWebProjectAWS",
+    "\\VS_Flask_dev\\FlaskWebProject\\FlaskWebProjectAWS\\Flask2"
   ],
   "PreviewInSolutionExplorer": false
 }

@@ -33,6 +33,8 @@
     <Compile Include="Data\DatabaseCon.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="dbconnect.py" />
+    <Compile Include="dbhandle.py" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="templates\about.html" />
