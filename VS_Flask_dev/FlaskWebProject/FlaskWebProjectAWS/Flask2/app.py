@@ -201,12 +201,20 @@ def is_logged_in(f):
 def analysis_main():
     return render_template('analysis_main.html')
 
+
+
+
 #####################################################################################
 ## Cover description
 @app.route('/cover_description')
 @is_logged_in
 def cover_description():
-    return render_template('cover_description.html')
+    from Cover_Descriptions import cover_discription
+    cover_dict, titles = cover_discription()
+    
+
+
+    return render_template('cover_description.html', covers = cover_dict)
 
 #####################################################################################
 ## Log out
