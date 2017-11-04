@@ -1,0 +1,82 @@
+﻿{% extends 'analysis_main.html' %}
+
+{% block cover_types %}
+<h1>Select Cover Types</h1>
+<div class="row-fluid" style="height:70%;">
+    <form method="POST">
+
+
+        <div class="checkbox">
+            <label><input name="cover_des_check" id="Checkbox1" type="checkbox" value="">Open Space, Poor Condition (Grass cover &#60; 50%)</label>
+        </div>
+        <div class="checkbox">
+            <label><input name="cover_des_check" id="Checkbox2" type="checkbox" value="">Open Space, Fair Condition (Grass cover 50% to 75%)</label>
+        </div>
+        <div class="checkbox">
+            <label><input name="cover_des_check" id="Checkbox3" type="checkbox" value="">Open Space, Good Condition (Grass cover &#62; 75%)</label>
+        </div>
+        <div class="checkbox">
+            <label><input id="Checkbox4" type="checkbox" value="">Roadway Impervious Area, Paved</label>
+        </div>
+
+
+
+        <div class="btn-group">
+            <button type="button" class="btn btn-primary">Selection 1</button>
+            <button type="button" class="btn btn-primary">Selection 2</button>
+            <button type="button" class="btn btn-primary">Selection 3</button>
+            <button type="button" class="btn btn-primary">Reset All</button>
+            <button type="button" class="btn btn-primary">Clear Selection</button>
+        </div>
+
+    </form>
+
+
+
+    <!--
+    <div class="checkbox">
+        <label><input id="Checkbox5" type="checkbox" value="">Paved; Curbs and storm sewers</label>
+    </div>
+    <div class="checkbox">
+        <label><input id="Checkbox6" type="checkbox" value="">Paved; Open Ditches</label>
+    </div>
+    <div class="checkbox">
+        <label><input id="Checkbox7" type="checkbox" value="">Gravel</label>
+    </div>
+    <div class="checkbox">
+        <label><input id="Checkbox8" type="checkbox" value="">Dirt</label>
+    </div>
+    <div class="checkbox">
+        <label><input id="Checkbox9" type="checkbox" value="">Natural Desrt Lanscaping</label>
+    </div>
+    <div class="checkbox">
+        <label><input id="Checkbox10" type="checkbox" value="">Artificial Desrt Lanscaping</label>
+    </div>
+
+
+
+    <div class="checkbox disabled">
+        <label><input type="checkbox" value="" disabled>Option 3</label>
+    </div>-->
+    
+
+
+    <!--<div class="checkbox">
+        <label>
+            <input type="checkbox" name="check" value="edit"> New entry
+        </label>
+    </div>
+
+    value = request.form.getlist('check') 
+
+    <input type="checkbox" value="{{c}}" name="checks"> {{c}}<br>
+    test = request.form.getlist('checks')-->
+
+
+    <!--<input id="Button1" type="Selection" value="button" />
+    <input id="Button1" type="Selection 1" value="button" />
+    <input id="Button1" type="Selection 1" value="button" />
+    <input id="Reset1" type="reset" value="reset" />-->
+
+</div>
+    {% endblock %}

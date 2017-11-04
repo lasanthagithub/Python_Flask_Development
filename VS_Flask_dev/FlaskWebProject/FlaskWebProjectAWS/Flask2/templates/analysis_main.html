@@ -1,6 +1,21 @@
 ﻿{% extends 'layout.html' %}
 
 {% block body %}
-    <h1>About the project</h1>
-    <p> This project is to understand the capabilty of Flask framework</p>
+<div class="row">
+    <div class="col-md-3">    
+        <h1 class="my-4">Category</h1>
+        <div class="list-group">
+            <a href="/cover_description" class="list-group-item">Select Cover Description</a>
+            <a href="#" class="list-group-item">Calc or item 1</a>
+            <a href="#" class="list-group-item">Calc or item 1</a>
+        </div>
+    </div>
+
+    <div class="col-md-9">
+        <!--<h1>About the project</h1>
+        <p> This project is to understand the capabilty of Flask framework</p>-->
+        {% block cover_types %} {% endblock %}
+    </div>
+</div>
+
 {% endblock %}

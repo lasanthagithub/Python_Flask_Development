@@ -1,0 +1,26 @@
+﻿{% extends 'analysis_main.html' %}
+
+{% block cover_types %}
+<h1>Select Cover Types</h1>
+<div class="row-fluid" style="height:70%;">
+    <div class="col-lg-6  container-fluid">
+        <h1>Select Cover Types</h1>
+        <form >
+            <div class="form-group" >
+                <label for="sel1">(Hold shift to select more than one):</label>
+                <select multiple class="form-control" id="sel1">
+                    <option>Open Space, Poor Condition (Grass cover &#60; 50%)</option>
+                    <option>Open Space, Fair Condition (Grass cover 50% to 75%)</option>
+                    <option>Open Space, Good Condition (Grass cover &#62; 75%)</option>
+                    <option>Roadway Impervious Area, Paved</option>
+                    <option>Paved; Curbs and storm sewers</option>
+                    <option>Paved; Open Ditches</option>
+                    <option>Gravel</option>
+                    <option>Dirt</option>
+                    <option>Natural Desrt Lanscaping</option>
+                </select>
+            </div>
+        </form>
+    </div>
+</div>
+    {% endblock %}

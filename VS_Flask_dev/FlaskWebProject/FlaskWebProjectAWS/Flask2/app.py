@@ -21,6 +21,7 @@ from functools import wraps
 #from dbconnect import connection
 from MySQLdb import escape_string as thwart
 import dbhandle
+#from data import dbhandle
 ## Instance of flask class
 app = Flask(__name__)
 
@@ -46,6 +47,12 @@ def index():
 @app.route('/about')
 def about():
     return render_template('about.html')
+
+#####################################################################################
+## Myaccount info
+@app.route('/myaccount')
+def myaccount():
+    return render_template('myaccount.html')
 
 #####################################################################################
 ## Articles page
@@ -94,8 +101,8 @@ class RegisterForm(Form): ## object is request.form type
         validators.DataRequired(),
         validators.EqualTo('confirm', message='Username/Password do not match')])
     confirm = PasswordField('Confirm Password')
-    accept_tos = BooleanField('I accept the <a href="/tos">Terms of Service and the\
-                     <a href="/privacynotice">Privacy Notice. Last updater Oct 2017')#,                      validators.DataRequired()
+    accept_tos = BooleanField('I accept the <a href="/tos/">Terms of Service</a> and the\
+                     <a href="/privacynotice/">Privacy Notice</a>. Last updater Oct 2017', [validators.DataRequired()])
 
 
 #####################################################################################
@@ -119,7 +126,7 @@ def register():
                 dbhandle.register__(name, email, username, password)
 
                 flash('Your are now registered. Please log in', 'success')
-                return redirect(url_for('index'))
+                return redirect(url_for('login'))
         return render_template('register.html', form=form)  
     
     except Exception as e:
@@ -157,7 +164,7 @@ def login():
 
                 flash('You are now logged in', 'success')
                 #return redirect(url_for('dashboard'))
-                return redirect(url_for('index'))
+                return redirect(url_for('cover_description'))
             else:
                 error = 'Invalid login'
                 return render_template('login.html', error=error)
@@ -187,10 +194,29 @@ def is_logged_in(f):
             return redirect(url_for('login'))
     return wrap
 
+#####################################################################################
 ## Main analysis page
 @app.route('/analysis_main')
+@is_logged_in
 def analysis_main():
     return render_template('analysis_main.html')
+
+#####################################################################################
+## Cover description
+@app.route('/cover_description')
+@is_logged_in
+def cover_description():
+    return render_template('cover_description.html')
+
+#####################################################################################
+## Log out
+@app.route('/logout')
+@is_logged_in
+def logput():   
+    session.clear()
+    flash('You are now logged out', 'success')
+    return redirect(url_for('login'))
+
 
 
 """	
@@ -316,14 +342,7 @@ def delete_article(id):
     return redirect(url_for('dashboard'))
 
 
-#####################################################################################
-## Log out
-@app.route('/logout')
-@is_logged_in
-def logput():   
-    session.clear()
-    flash('You are now logged out', 'success')
-    return redirect(url_for('login'))
+
 
 """
 #####################################################################################

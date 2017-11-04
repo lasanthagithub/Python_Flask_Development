@@ -1,0 +1,12 @@
+﻿{% extends 'layout.html' %}
+
+{% block body %}
+<div class="jumbotron text-center">
+    
+    {% if session.logged_in %}
+        <p>Username: {{session.username}}</p>
+    
+    {% endif %}
+
+</div>
+{% endblock %}

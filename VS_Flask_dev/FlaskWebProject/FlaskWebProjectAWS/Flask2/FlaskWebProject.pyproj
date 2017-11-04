@@ -27,19 +27,26 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="app.py" />
+    <Compile Include="Cover_Descriptions.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="data.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Data\DatabaseCon.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="data\dbhandle.py" />
     <Compile Include="dbconnect.py" />
     <Compile Include="dbhandle.py" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="templates\about.html" />
     <Content Include="templates\add_article.html" />
+    <Content Include="templates\analysis_main.html" />
     <Content Include="templates\article.html" />
+    <Content Include="templates\cover_description--.html" />
+    <Content Include="templates\cover_description.html" />
     <Content Include="templates\dashboard.html" />
     <Content Include="templates\edit_article.html" />
     <Content Include="templates\includes\_formhelpers.html" />
@@ -57,6 +64,7 @@
     <Content Include="static\scripts\bootstrap.min.js" />
     <Content Include="templates\articles.html" />
     <Content Include="templates\login.html" />
+    <Content Include="templates\myaccount.html" />
     <Content Include="templates\register.html" />
     <None Include="static\scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="static\scripts\jquery-1.10.2.js" />
