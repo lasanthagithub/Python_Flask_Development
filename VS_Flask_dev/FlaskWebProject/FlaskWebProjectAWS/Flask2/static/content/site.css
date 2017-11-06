@@ -9,6 +9,19 @@ body {
     padding-right: 15px;
 }
 
+footer {
+    background-color: orange;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 100px;
+    width: 100%;
+    overflow: hidden;
+}
+
+
+
+
 /* Set width on the form input elements since they're 100% wide by default */
 input,
 select,
