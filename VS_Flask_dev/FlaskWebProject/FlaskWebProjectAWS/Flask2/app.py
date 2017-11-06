@@ -206,11 +206,17 @@ def analysis_main():
 
 #####################################################################################
 ## Cover description
-@app.route('/cover_description')
+@app.route('/cover_description', methods=['GET', 'POST'])
 @is_logged_in
 def cover_description():
     from Cover_Descriptions import cover_discription
     cover_dict, titles = cover_discription()
+
+    if request.method == 'POST':
+        ## Get values form checkboxes
+        values = request.form.getlist('cover_des_check')
+        flash(values, 'success')
+        #return render_template('selection1.html', values = values)
     
 
 
