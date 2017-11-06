@@ -34,18 +34,46 @@
 
     
     {% block preferences %} 
-        <div >
+
+    <!--<div>
+        <label><input action="{{ url_for('cover_description')}}" type="submit" class="btn btn-primary" name="disc_sel" value="Preference 1">
+        </label>
+
+    </div>-->
+    <div>
+         
+        <button type="submit" class="btn btn-primary" name="disc_sel" value="Save_pref1">Preference 1</button>
+        <button type="submit" class="btn btn-primary" name="disc_sel" value="Save_pref1">Clear</button>
+    </div>
+    <br />
+    <div>
+        <button type="submit" class="btn btn-primary" name="disc_sel" value="Save_pref2">Preference 2</button>
+        <button type="submit" class="btn btn-primary" name="disc_sel" value="Save_pref1">Clear</button>
+    </div>
+
+    <br />
+
+    <div>
+        <button type="submit" class="btn btn-primary" name="disc_sel" value="Save_pref3">Preference 3</button>
+        <button type="submit" class="btn btn-primary" name="disc_sel" value="Save_pref1">Clear</button>
+    </div>
+
+
+
+        <!--<div >
             <button type="submit" class="btn btn-primary" name="disc_sel" value="Select All" href="selection1">Clear All</button>
             <button type="submit" class="btn btn-primary" name="disc_sel" value="Select All">All</button>
         </div>
-        <a href="selection1" class="btn btn-default pull-right">Edit</a>
+        <a href="selection1" name="discr_sel" class="btn btn-default pull-left">Preference 1</a>
+    <input type="submit" value="Delete" class="btn btn-danger">
+        <a href="selection1" class="btn btn-default pull-right">Preference 1</a>
     <br />
         <div>
             <button type="submit" class="btn btn-primary" name="disc_sel" value="Add to Selection 1">Add to Selection 1</button>
             <button type="submit" class="btn btn-primary" name="disc_sel" value="Add to Selection 2">Add to Selection 2</button>
             <button type="submit" class="btn btn-primary" name="disc_sel" value="Add to Selection 3">Add to Selection 3</button>
             <button type="submit" class="btn btn-primary" name="disc_sel" value="Select All">Clear All</button>
-        </div>
+        </div>-->
 
     {% endblock %}
     

@@ -28,6 +28,7 @@ app = Flask(__name__)
 
 
 
+
 """
 
 #debug=True ## here or below. need to remoce when production
@@ -128,9 +129,11 @@ def register():
                 flash('Your are now registered. Please log in', 'success')
                 return redirect(url_for('login'))
         return render_template('register.html', form=form)  
-    
-    except Exception as e:
-        return(str(e))
+    ## Activate only for debugging process
+    #except Exception as e:
+    #    return(str(e))
+    except:
+            return('Eroor 404')
 
     
 
@@ -147,8 +150,12 @@ def login():
             ## Create a curser
             ## Get user by user name
             result = dbhandle.get_user(username)
-        except Exception as e:
-            return(str(e))
+
+        ## Activate only for debugging process
+        #except Exception as e:
+        #    return(str(e))
+        except:
+            return('Eroor 404')
 
         if len(result) > 0:
             ## Get stored hash
@@ -212,7 +219,7 @@ def cover_description():
     from Cover_Descriptions import cover_discription
     cover_dict, titles = cover_discription()
 
-    if request.method == 'POST' and request.form['disc_sel'] == 'Add to Selection 1':
+    if request.method == 'POST' and request.form['disc_sel'] == 'Preference 1':
         ## Get values form checkboxes
         values = request.form.getlist('cover_des_check')
         flash(values, 'success')
@@ -232,9 +239,16 @@ def cover_description():
 
 #####################################################################################
 ## Selection1
-@app.route('/selection1')
+@app.route('/selection1', methods=['GET', 'POST'])
+@is_logged_in
 def selection1():
-    return render_template('selection1.html')
+    selection = request.form.getlist('cover_des_check')
+    if request.method == 'POST':
+        #if request.method == 'POST' and request.form['discr_sel'] == 'Preference 1':
+        #    values = request.form.getlist('cover_des_check')
+        flash(selection, 'success')
+        return redirect(url_for('selection1'), selection = selection)
+
 
 
 
@@ -384,7 +398,7 @@ if __name__ == '__main__':
     #except ValueError:
     #    PORT = 5555
     #app.run(HOST, PORT)
-    #app.secret_key = 'secret123'
+    app.secret_key = 'datamanagement'
 
-    app.secret_key = os.urandom(59)
+    #app.secret_key = os.urandom(59) ## moved to top
     app.run(debug=True)
