@@ -11,7 +11,7 @@ body {
 
 footer {
     background-color: lightgrey;
-    position: absolute;
+    position: static;
     left: 0;
     bottom: 0;
     height: 100px;
