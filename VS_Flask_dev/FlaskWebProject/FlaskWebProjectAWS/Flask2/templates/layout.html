@@ -10,25 +10,30 @@
 </head>
 <body>
 
-    {% include 'includes/_navbar.html' %}
-    <div class="container">
-        {% include 'includes/_messages.html' %}
-        {% block body %} {% endblock %}
-    </div>
+        {% include 'includes/_navbar.html' %}
 
-    <!-- Footer -->
-    <footer class="bg-dark modal-footer">
         <div class="container">
-            <p class="m-0 text-center text-white">Copyright &copy; MS4 Team 2017</p>
-        </div>
-        <!-- /.container -->
-    </footer>
+            {% include 'includes/_messages.html' %}
+            {% block body %} {% endblock %}
 
-    <!--<script src="../static/scripts/bootstrap.min.js"></script>-->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-   <script src="//cdn.ckeditor.com/4.7.3/standard/ckeditor.js"></script>
-    <!--<script src="../static/scripts/ckeditor/ckeditor.js"></script>-->
-    <script type="text/javascript">CKEDITOR.replace('editor')</script>
-    
+
+            <!-- Footer -->
+        </div>
+
+
+
+            <footer class="text-center">
+                <div class="container">
+                    <p class="m-0 text-center text-white">Copyright &copy; MS4 Team 2017</p>
+                </div>
+                <!-- /.container -->
+            </footer>
+
+        <!--<script src="../static/scripts/bootstrap.min.js"></script>-->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <script src="//cdn.ckeditor.com/4.7.3/standard/ckeditor.js"></script>
+        <!--<script src="../static/scripts/ckeditor/ckeditor.js"></script>-->
+        <script type="text/javascript">CKEDITOR.replace('editor')</script>
+
 </body>
 </html>
