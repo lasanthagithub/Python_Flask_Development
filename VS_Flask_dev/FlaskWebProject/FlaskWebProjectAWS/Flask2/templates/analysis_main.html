@@ -2,7 +2,7 @@
 
 {% block body %}
 <div class="row">
-    <div class="col-md-3">    
+    <div class="col-md-2">    
         <h1 class="my-4">Category</h1>
         <div class="list-group">
             <a href="/cover_description" class="list-group-item">Select Cover Description</a>
@@ -11,13 +11,17 @@
         </div>
     </div>
 
-    <div class="col-md-9">
+    <div class="col-md-7">
         <div class="container-fluid">
             {% block cover_types %} {% endblock %}
         </div>
         <!--<h1>About the project</h1>
-        <p> This project is to understand the capabilty of Flask framework</p>-->
-        
+        <p> This project is to understand the capabilty of Flask framework</p>-->        
+    </div>
+
+    <div class="col-md-3">
+        <h1 class="my-4">Preferences</h1>
+        {% block preferences %} {% endblock %}
     </div>
 </div>
 

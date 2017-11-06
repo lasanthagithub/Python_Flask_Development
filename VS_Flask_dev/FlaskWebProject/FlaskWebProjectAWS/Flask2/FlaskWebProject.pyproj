@@ -66,6 +66,9 @@
     <Content Include="templates\login.html" />
     <Content Include="templates\myaccount.html" />
     <Content Include="templates\register.html" />
+    <Content Include="templates\selection1.html" />
+    <Content Include="templates\selection2.html" />
+    <Content Include="templates\selection3.html" />
     <None Include="static\scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="static\scripts\jquery-1.10.2.js" />
     <Content Include="static\scripts\jquery-1.10.2.min.js" />

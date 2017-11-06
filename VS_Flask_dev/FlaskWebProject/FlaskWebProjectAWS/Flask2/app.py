@@ -10,6 +10,7 @@
 '''
 
 import gc
+import os
 from flask import Flask, render_template, flash, url_for, logging, session, request, redirect
 #from data import Articles
 #from flask_mysqldb import MySQL
@@ -39,7 +40,6 @@ app = Flask(__name__)
 ## Root or Home or Index page
 @app.route('/')
 def index():
-   
     return render_template('home.html')
 
 #####################################################################################
@@ -212,15 +212,31 @@ def cover_description():
     from Cover_Descriptions import cover_discription
     cover_dict, titles = cover_discription()
 
-    if request.method == 'POST':
+    if request.method == 'POST' and request.form['disc_sel'] == 'Add to Selection 1':
         ## Get values form checkboxes
         values = request.form.getlist('cover_des_check')
         flash(values, 'success')
-        #return render_template('selection1.html', values = values)
-    
+    elif request.method == 'POST' and request.form['disc_sel'] == 'Add to Selection 2':
+        ## Get values form checkboxes
+        values = request.form.getlist('cover_des_check')
+        flash(values, 'success')
+
+    elif request.method == 'POST' and request.form['disc_sel'] == 'Add to Selection 3':
+        ## Get values form checkboxes
+        values = request.form.getlist('cover_des_check')
+        flash(values, 'success')
+        #return render_template('selection1.html', values = values)    
 
 
     return render_template('cover_description.html', covers = cover_dict)
+
+#####################################################################################
+## Selection1
+@app.route('/selection1')
+def selection1():
+    return render_template('selection1.html')
+
+
 
 #####################################################################################
 ## Log out
@@ -368,5 +384,7 @@ if __name__ == '__main__':
     #except ValueError:
     #    PORT = 5555
     #app.run(HOST, PORT)
-    app.secret_key = 'secret123'
+    #app.secret_key = 'secret123'
+
+    app.secret_key = os.urandom(59)
     app.run(debug=True)
