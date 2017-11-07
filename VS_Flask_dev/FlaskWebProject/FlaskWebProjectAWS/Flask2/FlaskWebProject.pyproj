@@ -73,6 +73,7 @@
     <Content Include="templates\selection1.html" />
     <Content Include="templates\selection2.html" />
     <Content Include="templates\selection3.html" />
+    <Content Include="templates\to_add.html" />
     <None Include="static\scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="static\scripts\jquery-1.10.2.js" />
     <Content Include="static\scripts\jquery-1.10.2.min.js" />

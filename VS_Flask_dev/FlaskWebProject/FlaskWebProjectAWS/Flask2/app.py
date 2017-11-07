@@ -264,12 +264,19 @@ def cn_computation():
 
 
 #####################################################################################
-## Main analysis page
+## Edit CN preferences
 @app.route('/cn_preferences_edit')
 @is_logged_in
 def cn_preferences_edit():
     return render_template('cn_preferences_edit.html')
 
+
+#####################################################################################
+## Edit CN preferences
+@app.route('/to_add')
+@is_logged_in
+def to_add():
+    return render_template('to_add.html')
 
 
 
