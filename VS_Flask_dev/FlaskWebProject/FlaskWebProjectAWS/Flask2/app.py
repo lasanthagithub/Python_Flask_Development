@@ -263,6 +263,13 @@ def cn_computation():
 
 
 
+#####################################################################################
+## Main analysis page
+@app.route('/cn_preferences_edit')
+@is_logged_in
+def cn_preferences_edit():
+    return render_template('cn_preferences_edit.html')
+
 
 
 
