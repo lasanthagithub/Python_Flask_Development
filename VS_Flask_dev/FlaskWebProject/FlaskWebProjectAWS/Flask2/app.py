@@ -224,15 +224,40 @@ def analysis_tool_landing():
 @app.route('/cn_computation', methods=['GET', 'POST'])
 @is_logged_in
 def cn_computation():
-    
+        
     ## Import the CN items dictionary
     cover_dict, titles = cover_discription()
 
-    if request.method == 'POST' and request.form['disc_sel'] == 'Save_pref1':
+    session['cn_preference_3'] = None
+    session['cn_preference_3'] = None
+    session['cn_preference_3'] = None
+
+    if request.method == 'POST' and request.form['disc_sel'] == 'Save pref. 1...':
         ## Get values form checkboxes
         values = request.form.getlist('cover_des_check')
-        session['cn_preference_1'] = values
-        flash('CN computation "Preference 1" is saved for this session.', 'success')
+        if values:
+            session['cn_preference_1'] = values
+            flash('CN computation "Preference 1" is saved for this session.', 'success')
+        else:
+            flash('Please select items for Preference 1.', 'warning')
+
+    if request.method == 'POST' and request.form['disc_sel'] == 'Save pref. 2...':
+        ## Get values form checkboxes
+        values = request.form.getlist('cover_des_check')
+        if values:
+            session['cn_preference_2'] = values
+            flash('CN computation "Preference 2" is saved for this session.', 'success')
+        else:
+            flash('Please select items for Preference 2.', 'warning')
+
+    if request.method == 'POST' and request.form['disc_sel'] == 'Save pref. 3...':
+        ## Get values form checkboxes
+        values = request.form.getlist('cover_des_check')
+        if values:
+            session['cn_preference_3'] = values
+            flash('CN computation "Preference 3" is saved for this session.', 'success')
+        else:
+            flash('Please select items for Preference 3.', 'warning')
 
     return render_template('cn_computation.html', covers = cover_dict)
 
