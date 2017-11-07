@@ -1,0 +1,74 @@
+﻿{% extends 'cn_computation_main.html' %}
+
+{% block cn_computation %}
+<div class="col-md-7">
+
+    <form method="POST" action="" class="form-group">
+
+    <div>
+        <table class="table table.striped">
+            <thead>
+                <tr>
+                    <th rowspan="3"> Cover Description </th>
+                    <th colspan="8"> Curve Number and Associated Areas </th>
+                </tr>
+                <!--subcolumns of Curver Number and Associated Areas-->
+                <tr>
+                    <th>A</th>
+                    <th>Area</th>
+                    <th>B</th>
+                    <th>Area</th>
+                    <th>C</th>
+                    <th>Area</th>
+                    <th>D</th>
+                    <th>Area</th>
+                </tr>
+            </thead>
+
+
+            <!--<thead>
+                <tr>
+                    <th rowspan="2"> </th>
+                    <th rowspan="6">Cover Description</th>
+                    <th rowspan="2">A</th>
+                    <th rowspan="2">B</th>
+                    <th rowspan="2">C</th>
+                    <th rowspan="2">D</th>
+                </tr>
+            </thead>-->
+            {% for key, value in covers.items() %}
+
+            <tr>
+                <td>{{ value[0] }}</td>
+                <td><div id="DA1">{{ value[1] }}</div></td>
+                <td> <input type="text" id="A1" size="3"></td>
+                <td><div id="DB1">{{ value[2] }}</div></td>
+                <td> <input type="text" id="B1" size="3"></td>
+                <td><div id="DC1">{{ value[3] }}</div></td>
+                <td> <input type="text" id="C1" size="3"></td>
+                <td><div id="DD1">{{ value[4] }}</div></td>
+                <td> <input type="text" id="D1" size="3"></td>
+                <td><div id="outputP1"></div></td>
+            </tr>
+
+            <!--<tr>
+                <td>
+                    <input type="checkbox" name="cover_des_check" id="Checkbox" value="{{ key }}" class="form-control">
+                </td>
+                <td>{{ value[0] }}</td>
+                <td>{{ value[1] }}</td>
+                <td>{{ value[2] }}</td>
+                <td>{{ value[3] }}</td>
+                <td>{{ value[4] }}</td>
+            </tr>-->
+
+
+
+            {% endfor %}
+
+        </table>
+    </div>
+    </form>
+</div>
+{% endblock %}
+

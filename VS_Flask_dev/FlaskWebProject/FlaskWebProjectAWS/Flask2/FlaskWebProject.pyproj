@@ -71,7 +71,7 @@
     <Content Include="templates\login.html" />
     <Content Include="templates\myaccount.html" />
     <Content Include="templates\register.html" />
-    <Content Include="templates\selection1.html" />
+    <Content Include="templates\cn_preference_1.html" />
     <Content Include="templates\selection2.html" />
     <Content Include="templates\selection3.html" />
     <Content Include="templates\to_add.html" />

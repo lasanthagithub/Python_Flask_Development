@@ -296,6 +296,13 @@ def to_add():
     return render_template('to_add.html')
 
 
+#####################################################################################
+## cn_preference_1
+@app.route('/cn_preference_1')
+@is_logged_in
+def cn_preference_1():
+    cover_dict, titles = cover_discription()
+    return render_template('cn_preference_1.html', covers = cover_dict)
 
 #####################################################################################
 ## Cover description
