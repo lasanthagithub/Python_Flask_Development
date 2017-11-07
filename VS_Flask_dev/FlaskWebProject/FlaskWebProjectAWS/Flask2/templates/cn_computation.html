@@ -1,0 +1,33 @@
+﻿{% extends 'analysis_main.html' %}
+
+{% block analysys_tools %}
+<form method="POST">
+    <div class="col-md-7">
+        <h2>CN Computation</h2>
+        <h3>Select prefered criteria</h3>
+
+        <table class="table table.striped">
+            <thead>
+                <tr><th rowspan="2"></th>
+                <th rowspan="3">Cover Description</th></tr>
+
+            </thead>
+            <tbody>
+                {% for key, value in covers.items() %}
+                <tr>
+                    <td><input type="checkbox" name="cover_des_check" id="Checkbox1" value="{{key}}"></td>
+                    <td>{{value[0]}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+    </div>
+
+
+
+    <div class="col-md-3">
+        <input type="submit" class="btn btn-primary" name="disc_sel" value="Save_pref1">
+    </div>
+</form>
+{% endblock %}

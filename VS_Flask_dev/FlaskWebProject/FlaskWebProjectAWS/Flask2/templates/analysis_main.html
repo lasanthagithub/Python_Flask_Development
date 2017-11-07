@@ -3,28 +3,18 @@
 {% block body %}
 <div class="row">
     <div class="col-md-2">    
-        <h1 class="my-4">Category</h1>
+        <!--<h1 class="my-4">Category</h1>-->
         <div class="list-group">
-            <a href="/cover_description" class="list-group-item">Select Cover Description</a>
+            <a href="/cn_computation" class="list-group-item">CN Computation</a>
             <a href="#" class="list-group-item">Item 1</a>
-            <a href="#" class="list-group-item">Iitem 1</a>
+            <a href="#" class="list-group-item">Item 2</a>
+            <a href="#" class="list-group-item">Item 3</a>
+            <a href="#" class="list-group-item">Item 4</a>
+            <a href="#" class="list-group-item">Item 5</a>
         </div>
     </div>
-
-    <div class="col-md-7">
-        <div class="container-fluid">
-            {% block cover_types %} {% endblock %}
-        </div>
-        <!--<h1>About the project</h1>
-        <p> This project is to understand the capabilty of Flask framework</p>-->        
-    </div>
-
-    <div class="col-md-3">
-        <h1 class="my-4">Preferences</h1>
-        {% block preferences %} 
-        
-        {% endblock %}
+    <div class="col-md-10 container">
+        {% block analysys_tools %} {% endblock %}
     </div>
 </div>
-
 {% endblock %}

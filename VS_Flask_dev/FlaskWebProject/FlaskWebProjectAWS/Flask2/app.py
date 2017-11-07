@@ -23,6 +23,8 @@ from functools import wraps
 from MySQLdb import escape_string as thwart
 import dbhandle
 #from data import dbhandle
+from Cover_Descriptions import cover_discription
+
 ## Instance of flask class
 app = Flask(__name__)
 
@@ -171,7 +173,7 @@ def login():
 
                 flash('You are now logged in', 'success')
                 #return redirect(url_for('dashboard'))
-                return redirect(url_for('cover_description'))
+                return redirect(url_for('show_cover_description'))
             else:
                 error = 'Invalid login'
                 return render_template('login.html', error=error)
@@ -209,17 +211,72 @@ def analysis_main():
     return render_template('analysis_main.html')
 
 
+#####################################################################################
+## Main analysis page
+@app.route('/analysis_tool_landing')
+@is_logged_in
+def analysis_tool_landing():
+    return render_template('analysis_tool_landing.html')
+
+
+#####################################################################################
+## CN computation
+@app.route('/cn_computation', methods=['GET', 'POST'])
+@is_logged_in
+def cn_computation():
+    
+    ## Import the CN items dictionary
+    cover_dict, titles = cover_discription()
+
+    if request.method == 'POST' and request.form['disc_sel'] == 'Save_pref1':
+        ## Get values form checkboxes
+        values = request.form.getlist('cover_des_check')
+        flash(values, 'success')
+
+    return render_template('cn_computation.html', covers = cover_dict)
+
+
+
+
 
 
 #####################################################################################
 ## Cover description
-@app.route('/cover_description', methods=['GET', 'POST'])
+@app.route('/show_cover_description', methods=['GET', 'POST'])
 @is_logged_in
-def cover_description():
+def show_cover_description():
     from Cover_Descriptions import cover_discription
     cover_dict, titles = cover_discription()
 
-    if request.method == 'POST' :
+    if request.method == 'POST' and request.form['disc_sel'] == 'Save_pref1':
+        ## Get values form checkboxes
+        values = request.form.getlist('cover_des_check')
+        flash(values, 'success')
+    #elif request.method == 'POST' and request.form['disc_sel'] == 'Add to Selection 2':
+    #    ## Get values form checkboxes
+    #    values = request.form.getlist('cover_des_check')
+    #    flash(values, 'success')
+
+    #elif request.method == 'POST' and request.form['disc_sel'] == 'Add to Selection 3':
+    #    ## Get values form checkboxes
+    #    values = request.form.getlist('cover_des_check')
+    #    flash(values, 'success')
+    #    #return render_template('selection1.html', values = values)    
+
+
+    return render_template('show_cover_description.html', covers = cover_dict)
+
+
+
+#####################################################################################
+## Cover description
+@app.route('/select_cover_description', methods=['GET', 'POST'])
+@is_logged_in
+def select_cover_description():
+    from Cover_Descriptions import cover_discription
+    cover_dict, titles = cover_discription()
+
+    if request.method == 'POST' and request.form['disc_sel'] == 'Save_pref1':
         ## Get values form checkboxes
         values = request.form.getlist('cover_des_check')
         flash(values, 'success')
@@ -236,6 +293,11 @@ def cover_description():
 
 
     return render_template('cover_description.html', covers = cover_dict)
+
+
+
+
+
 
 #####################################################################################
 ## Selection1
