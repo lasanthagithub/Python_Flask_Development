@@ -46,9 +46,10 @@
     <Content Include="templates\analysis_main.html" />
     <Content Include="templates\analysis_tool_landing.html" />
     <Content Include="templates\article.html" />
-    <Content Include="templates\cn_computation.html" />
+    <Content Include="templates\cn_computation_view_edit.html" />
+    <Content Include="templates\cn_computation_landing.html" />
+    <Content Include="templates\cn_computation_main.html" />
     <Content Include="templates\cn_preferences_edit.html" />
-    <Content Include="templates\cover_description--.html" />
     <Content Include="templates\cover_description---.html" />
     <Content Include="templates\show_cover_description.html" />
     <Content Include="templates\dashboard.html" />

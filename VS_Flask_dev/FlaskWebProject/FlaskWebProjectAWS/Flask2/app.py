@@ -218,18 +218,35 @@ def analysis_main():
 def analysis_tool_landing():
     return render_template('analysis_tool_landing.html')
 
+################# CN COMPUTING ######################################################
+
+#####################################################################################
+## CN computation landing
+@app.route('/cn_computation_main')
+@is_logged_in
+def cn_computation_main():
+    return render_template('cn_computation_main.html')
+
+#####################################################################################
+## cn_computing landing
+@app.route('/cn_computation_landing')
+@is_logged_in
+def cn_computation_landing():
+    return render_template('cn_computation_landing.html')
+
+
 
 #####################################################################################
 ## CN computation
-@app.route('/cn_computation', methods=['GET', 'POST'])
+@app.route('/cn_computation_view_edit', methods=['GET', 'POST'])
 @is_logged_in
-def cn_computation():
-        
+def cn_computation_view_edit():
+    analysis_topic = 'CN Computation'    
     ## Import the CN items dictionary
     cover_dict, titles = cover_discription()
 
-    session['cn_preference_3'] = None
-    session['cn_preference_3'] = None
+    session['cn_preference_1'] = None
+    session['cn_preference_2'] = None
     session['cn_preference_3'] = None
 
     if request.method == 'POST' and request.form['disc_sel'] == 'Save pref. 1...':
@@ -259,7 +276,7 @@ def cn_computation():
         else:
             flash('Please select items for Preference 3.', 'warning')
 
-    return render_template('cn_computation.html', covers = cover_dict)
+    return render_template('cn_computation_view_edit.html', covers = cover_dict, )
 
 
 

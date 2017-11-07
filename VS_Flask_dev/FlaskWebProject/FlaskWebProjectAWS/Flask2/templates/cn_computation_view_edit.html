@@ -1,9 +1,9 @@
-﻿{% extends 'analysis_main.html' %}
+﻿{% extends 'cn_computation_main.html' %}
 
-{% block analysys_tools %}
-<form method="POST" action="/cn_computation">
+{% block cn_computation %}
+<form method="POST" action="/cn_computation_view_edit">
     <div class="col-md-7">
-        <h2>CN Computation</h2>
+        <!--<h2>CN Computation</h2>-->
         <h3>Select prefered criteria</h3>
 
         <table class="table table.striped">
@@ -27,21 +27,21 @@
 
 
     <div class="col-md-3">
+        <br />
         <div>
-            <input type="submit" class="btn btn-primary" name="disc_sel" value="Save pref. 1...">
+            <input type="submit" class="btn btn-primary" name="disc_sel" value="Save pref. 1..." style="height:35px; width:150px">
         </div>
         <br />
         <div>
-            <input type="submit" class="btn btn-primary" name="disc_sel" value="Save pref. 2...">
+            <input type="submit" class="btn btn-primary" name="disc_sel" value="Save pref. 2..." style="height:35px; width:150px">
         </div>
         <br />
         <div>
-            <input type="submit" class="btn btn-primary" name="disc_sel" value="Save pref. 3...">
+            <input type="submit" class="btn btn-primary" name="disc_sel" value="Save pref. 3..." style="height:35px; width:150px">
         </div>
         <br />
         <div>
-            <!--<input type="submit" class="btn btn-primary" name="disc_sel" value="Edit prefs...">-->
-            <a href="cn_preferences_edit" class="btn btn-primary ">Edit prefs...</a>
+            <a href="cn_preferences_edit" class="btn btn-primary" style="height:35px; width:150px">View / Edit prefs...</a>
         </div>
     </div>
 </form>

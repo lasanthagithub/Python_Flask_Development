@@ -1,7 +1,49 @@
-﻿{% extends 'analysis_main.html' %}
+﻿{% extends 'cn_computation_main.html' %}
 
-{% block analysys_tools %} 
+{% block cn_computation %}
 
+<form method="POST" action="/cn_computation_edit">
+    <div class="col-md-7">
+        <h3>Runoff Curve Number (CN) Computation Table</h3>
+        <h4>SCS Method</h4>
+
+        <!--<table class="table table.striped">
+            <thead>
+                <tr>
+                    <th rowspan="2"></th>
+                    <th rowspan="4">Cover Description</th>
+                </tr>
+
+            </thead>
+            <tbody>
+
+            </tbody>
+        </table>-->
+
+    </div>
+
+
+
+    <div class="col-md-3">
+        <br />
+        <div>
+            <input type="submit" class="btn btn-primary" name="disc_sel" value="Preference 1" style="height:35px; width:150px">
+        </div>
+        <br />
+        <div>
+            <input type="submit" class="btn btn-primary" name="disc_sel" value="Preference 1" style="height:35px; width:150px">
+        </div>
+        <br />
+        <div>
+            <input type="submit" class="btn btn-primary" name="disc_sel" value="Preference 1" style="height:35px; width:150px">
+        </div>
+        <br />
+
+        <div>
+            <a href="cn_computation_view_edit" class="btn btn-primary" style="height:35px; width:150px">Show / Edit CN items</a>
+        </div>
+    </div>
+</form>
 
 
 {% endblock %}
