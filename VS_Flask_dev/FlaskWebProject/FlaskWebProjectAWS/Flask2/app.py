@@ -231,7 +231,8 @@ def cn_computation():
     if request.method == 'POST' and request.form['disc_sel'] == 'Save_pref1':
         ## Get values form checkboxes
         values = request.form.getlist('cover_des_check')
-        flash(values, 'success')
+        session['cn_preference_1'] = values
+        flash('CN computation "Preference 1" is saved for this session.', 'success')
 
     return render_template('cn_computation.html', covers = cover_dict)
 
