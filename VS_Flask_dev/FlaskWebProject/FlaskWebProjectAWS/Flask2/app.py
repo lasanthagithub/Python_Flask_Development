@@ -219,20 +219,20 @@ def cover_description():
     from Cover_Descriptions import cover_discription
     cover_dict, titles = cover_discription()
 
-    if request.method == 'POST' and request.form['disc_sel'] == 'Preference 1':
+    if request.method == 'POST' :
         ## Get values form checkboxes
         values = request.form.getlist('cover_des_check')
         flash(values, 'success')
-    elif request.method == 'POST' and request.form['disc_sel'] == 'Add to Selection 2':
-        ## Get values form checkboxes
-        values = request.form.getlist('cover_des_check')
-        flash(values, 'success')
+    #elif request.method == 'POST' and request.form['disc_sel'] == 'Add to Selection 2':
+    #    ## Get values form checkboxes
+    #    values = request.form.getlist('cover_des_check')
+    #    flash(values, 'success')
 
-    elif request.method == 'POST' and request.form['disc_sel'] == 'Add to Selection 3':
-        ## Get values form checkboxes
-        values = request.form.getlist('cover_des_check')
-        flash(values, 'success')
-        #return render_template('selection1.html', values = values)    
+    #elif request.method == 'POST' and request.form['disc_sel'] == 'Add to Selection 3':
+    #    ## Get values form checkboxes
+    #    values = request.form.getlist('cover_des_check')
+    #    flash(values, 'success')
+    #    #return render_template('selection1.html', values = values)    
 
 
     return render_template('cover_description.html', covers = cover_dict)

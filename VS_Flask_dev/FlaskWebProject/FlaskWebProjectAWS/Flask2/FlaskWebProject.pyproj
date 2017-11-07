@@ -46,6 +46,7 @@
     <Content Include="templates\analysis_main.html" />
     <Content Include="templates\article.html" />
     <Content Include="templates\cover_description--.html" />
+    <Content Include="templates\cover_description---.html" />
     <Content Include="templates\cover_description.html" />
     <Content Include="templates\dashboard.html" />
     <Content Include="templates\edit_article.html" />

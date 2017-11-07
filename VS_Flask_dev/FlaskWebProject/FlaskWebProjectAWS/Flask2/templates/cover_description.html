@@ -1,81 +1,22 @@
 ﻿{% extends 'analysis_main.html' %}
 
 
-<form method="POST">
-    {% block cover_types %}
-    <h1>Select Cover Types</h1>
-    <div>
-        <table class="table table.striped">
-            <thead>
-                <tr>
-                    <th rowspan="2"> </th>
-                    <th rowspan="6">Cover Description</th>
-                    <th rowspan="2">A</th>
-                    <th rowspan="2">B</th>
-                    <th rowspan="2">C</th>
-                    <th rowspan="2">D</th>
-                </tr>
-            </thead>
-            {% for key, value in covers.items() %}
-                <tr>                
-                    <td>                       
-                        <input type="checkbox" name="cover_des_check" id="Checkbox1" value="{{key}}">
-                    </td>
-                    <td>{{value[0]}}</td>
-                    <td>{{value[1]}}</td>
-                    <td>{{value[2]}}</td>
-                    <td>{{value[3]}}</td>
-                    <td>{{value[4]}}</td>  
-                </tr>
-            {% endfor %}
-        </table>
-    </div>
-    {% endblock %}
+{% block cover_types %}
 
-    
-    {% block preferences %} 
-
-    <!--<div>
-        <label><input action="{{ url_for('cover_description')}}" type="submit" class="btn btn-primary" name="disc_sel" value="Preference 1">
-        </label>
-
-    </div>-->
-    <div>
-         
-        <button type="submit" class="btn btn-primary" name="disc_sel" value="Save_pref1">Preference 1</button>
-        <button type="submit" class="btn btn-primary" name="disc_sel" value="Save_pref1">Clear</button>
-    </div>
-    <br />
-    <div>
-        <button type="submit" class="btn btn-primary" name="disc_sel" value="Save_pref2">Preference 2</button>
-        <button type="submit" class="btn btn-primary" name="disc_sel" value="Save_pref1">Clear</button>
-    </div>
-
-    <br />
-
-    <div>
-        <button type="submit" class="btn btn-primary" name="disc_sel" value="Save_pref3">Preference 3</button>
-        <button type="submit" class="btn btn-primary" name="disc_sel" value="Save_pref1">Clear</button>
-    </div>
+    <form method="POST">
 
 
 
-        <!--<div >
-            <button type="submit" class="btn btn-primary" name="disc_sel" value="Select All" href="selection1">Clear All</button>
-            <button type="submit" class="btn btn-primary" name="disc_sel" value="Select All">All</button>
+        {% for key, value in covers.items() %}
+
+        <div class="checkbox">
+
+            <label><input type="checkbox" name="cover_des_check" id="Checkbox1" value="{{key}}">{{value[0]}}</label>
+
         </div>
-        <a href="selection1" name="discr_sel" class="btn btn-default pull-left">Preference 1</a>
-    <input type="submit" value="Delete" class="btn btn-danger">
-        <a href="selection1" class="btn btn-default pull-right">Preference 1</a>
-    <br />
-        <div>
-            <button type="submit" class="btn btn-primary" name="disc_sel" value="Add to Selection 1">Add to Selection 1</button>
-            <button type="submit" class="btn btn-primary" name="disc_sel" value="Add to Selection 2">Add to Selection 2</button>
-            <button type="submit" class="btn btn-primary" name="disc_sel" value="Add to Selection 3">Add to Selection 3</button>
-            <button type="submit" class="btn btn-primary" name="disc_sel" value="Select All">Clear All</button>
-        </div>-->
 
-    {% endblock %}
-    
+        {% endfor %}
+        <input type="submit" class="btn btn-primary" name="disc_sel" value="Save_pref1">
+    </form>
 
-</form>
+
