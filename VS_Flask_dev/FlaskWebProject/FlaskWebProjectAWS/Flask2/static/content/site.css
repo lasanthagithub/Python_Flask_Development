@@ -53,3 +53,23 @@ input[type="checkbox"].input-validation-error {
 .validation-summary-valid {
     display: none;
 }
+
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+    
+}
+
+input[type="number"] {
+    -moz-appearance: textfield;
+    height: 30px;
+    width: 50px;
+    padding: 2px 5px;
+    font-size: 14px;
+    line-height: 1.5; /* If Placeholder of the input is moved up, rem/modify this. */
+    border-radius: 3px;
+}
+
+

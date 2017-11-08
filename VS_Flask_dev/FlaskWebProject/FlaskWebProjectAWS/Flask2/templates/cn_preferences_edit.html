@@ -14,21 +14,37 @@
     <div class="col-md-3">
         <br />
         <div>
+            {% if not session['cn_preference_1'] %}
+            <a href="#" class="btn btn-primary" style="height:35px; width:150px" disabled>Preference 1</a>
+            {% else %}
             <a href="cn_preference_1" class="btn btn-primary" style="height:35px; width:150px">Preference 1</a>
+            {% endif %}
         </div>
 
         <br />
         <div>
+            {% if not session['cn_preference_2'] %}
+            <a href="#" class="btn btn-primary" style="height:35px; width:150px" disabled>Preference 2</a>
+            {% else %}
             <a href="cn_preference_2" class="btn btn-primary" style="height:35px; width:150px">Preference 2</a>
+            {% endif %}
         </div>
         <br />
         <div>
+            {% if not session['cn_preference_3'] %}
+            <a href="#" class="btn btn-primary" style="height:35px; width:150px" disabled>Preference 3</a>
+            {% else %}
             <a href="cn_preference_3" class="btn btn-primary" style="height:35px; width:150px">Preference 3</a>
+            {% endif %}
         </div>
         <br />
 
         <div>
+            {% if not session['cn_preference_1'] and not session['cn_preference_2'] and not session['cn_preference_3'] %}
+            <a href="#" class="btn btn-primary" style="height:35px; width:150px" dissabled>Show / Edit CN items</a>
+            {% else %}
             <a href="cn_computation_view_edit" class="btn btn-primary" style="height:35px; width:150px">Show / Edit CN items</a>
+            {% endif %}
         </div>
         <br />
     </div>

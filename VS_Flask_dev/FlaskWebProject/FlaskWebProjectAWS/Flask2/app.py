@@ -173,7 +173,7 @@ def login():
 
                 flash('You are now logged in', 'success')
                 #return redirect(url_for('dashboard'))
-                return redirect(url_for('show_cover_description'))
+                return redirect(url_for('index'))
             else:
                 error = 'Invalid login'
                 return render_template('login.html', error=error)
@@ -245,10 +245,7 @@ def cn_computation_view_edit():
     ## Import the CN items dictionary
     cover_dict, titles = cover_discription()
 
-    session['cn_preference_1'] = None
-    session['cn_preference_2'] = None
-    session['cn_preference_3'] = None
-
+    
     if request.method == 'POST' and request.form['disc_sel'] == 'Save pref. 1...':
         ## Get values form checkboxes
         values = request.form.getlist('cover_des_check')
@@ -276,7 +273,7 @@ def cn_computation_view_edit():
         else:
             flash('Please select items for Preference 3.', 'warning')
 
-    return render_template('cn_computation_view_edit.html', covers = cover_dict, )
+    return render_template('cn_computation_view_edit.html', covers = cover_dict)
 
 
 
@@ -303,20 +300,33 @@ def to_add():
 def cn_preference_1():
     cover_dict, titles = cover_discription()
 
+    ## Dict to save selections and values preference 1
+
+    cn_pref_1_dict =  {}
+
+
     if request.method == 'POST': 
         keys = request.form.keys()
-        return render_template('cn_preference_1_calculation.html', keys = keys )
+        
+        for item in session['cn_preference_1']:
+            ## create a new dictionary with preference and their input values
+            cn_pref_1_dict[item] = cover_dict[item] + request.form.getlist(item)
+
+            cn_area = (float(cn_pref_1_dict[item][1]) * float(cn_pref_1_dict[item][5])) + (float(cn_pref_1_dict[item][2]) * float(cn_pref_1_dict[item][6])) + (float(cn_pref_1_dict[item][3]) * float(cn_pref_1_dict[item][7])) + (float(cn_pref_1_dict[item][4]) * float(cn_pref_1_dict[item][8]))
+            cn_pref_1_dict[item] = cn_pref_1_dict[item] + [round(cn_area, 4)]
+
+        return render_template('cn_view_calc_results.html', cn_pref = cn_pref_1_dict)
 
     return render_template('cn_preference_1.html', covers = cover_dict)
 
 
 #####################################################################################
 ## cn_preference_1
-@app.route('/cn_preference_1_calculation')
+@app.route('/cn_view_calc_results')
 @is_logged_in
 def cn_preference_1_calculation():
     cover_dict, titles = cover_discription()
-    return render_template('cn_preference_1_calculation.html')
+    return render_template('cn_view_calc_results.html')
 
 
 #####################################################################################

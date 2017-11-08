@@ -31,14 +31,14 @@
 
                 <tr>
                     <td colspan="5">{{ covers[item][0] }}</td>
-                    <td><div id="DA1">{{ covers[item][1] }}</div></td>
-                    <td> <input type="text" id="A1" size="3" name="{{ item }}_area_A"></td>
+                    <td colspan="1"><div id="DA1">{{ covers[item][1] }}</div></td>
+                    <td><input type="number" step="any" name="{{ item }}" min="0" max="1" value="0.0"></td>
                     <td><div id="DB1">{{ covers[item][2] }}</div></td>
-                    <td> <input type="text" id="B1" size="3" name="{{ item }}_area_B"></td>
+                    <td><input type="number" step="any" name="{{ item }}" min="0" max="1" value="0.0"></td>
                     <td><div id="DC1">{{ covers[item][3] }}</div></td>
-                    <td> <input type="text" id="C1" size="3" name="{{ item }}_area_C"></td>
+                    <td><input type="number" step="any" name="{{ item }}" min="0" max="1" value="0.0"></td>
                     <td><div id="DD1">{{ covers[item][4] }}</div></td>
-                    <td> <input type="text" id="D1" size="3" name="{{ item }}_area_D"></td>
+                    <td><input type="number" step="any" name="{{ item }}" min="0" max="1" value="0.0"></td>
                     <td><div id="outputP1"></div></td>
                 </tr>
 
@@ -52,17 +52,7 @@
 
     <div class="col-md-3">
         <br />
-        <!--<div>
-            <input type="submit" class="btn btn-primary" name="disc_sel" value="Save pref. 1..." style="height:35px; width:150px">
-        </div>
-        <br />
-        <div>
-            <input type="submit" class="btn btn-primary" name="disc_sel" value="Save pref. 2..." style="height:35px; width:150px">
-        </div>
-        <br />
-        <div>
-            <input type="submit" class="btn btn-primary" name="disc_sel" value="Compute" style="height:35px; width:150px">
-        </div>-->
+
         <div>
             <input type="submit" class="btn btn-primary" name="disc_sel" value="Compute" style="height:35px; width:150px">
         </div>
