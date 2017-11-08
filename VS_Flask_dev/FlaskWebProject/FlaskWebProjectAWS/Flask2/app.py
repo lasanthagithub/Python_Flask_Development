@@ -289,7 +289,7 @@ def cn_preferences_edit():
 
 
 #####################################################################################
-## Edit CN preferences
+## TO DO sections
 @app.route('/to_add')
 @is_logged_in
 def to_add():
@@ -298,14 +298,25 @@ def to_add():
 
 #####################################################################################
 ## cn_preference_1
-@app.route('/cn_preference_1')
+@app.route('/cn_preference_1', methods=['GET', 'POST'])
 @is_logged_in
 def cn_preference_1():
     cover_dict, titles = cover_discription()
+
+    if request.method == 'POST': 
+        keys = request.form.keys()
+        return render_template('cn_preference_1_calculation.html', keys = keys )
+
     return render_template('cn_preference_1.html', covers = cover_dict)
 
 
-
+#####################################################################################
+## cn_preference_1
+@app.route('/cn_preference_1_calculation')
+@is_logged_in
+def cn_preference_1_calculation():
+    cover_dict, titles = cover_discription()
+    return render_template('cn_preference_1_calculation.html')
 
 
 #####################################################################################

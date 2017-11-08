@@ -1,63 +1,77 @@
 ﻿{% extends 'cn_computation_main.html' %}
 
 {% block cn_computation %}
-<div class="col-md-7">
 
-    <form method="POST" action="" class="form-group">
 
-    <div>
-        <table class="table table.striped">
-            <thead>
-                <tr>
-                    <th colspan="5"></th>
-                    <th colspan="8"> Curve Number and Associated Areas </th>
-                </tr>
-                <!--subcolumns of Curver Number and Associated Areas-->
-                <tr>
-                    <th colspan="5">Cover Description</th>
-                    <th colspan="1">A</th>
-                    <th colspan="1">Area</th>
-                    <th colspan="1" >B</th>
-                    <th colspan="1">Area</th>
-                    <th colspan="1">C</th>
-                    <th colspan="1">Area</th>
-                    <th colspan="1">D</th>
-                    <th colspan="1">Area</th>
-                </tr>
-            </thead>
-            
+<form method="POST" action="cn_preference_1" class="form-group">
+    <div class="col-md-7">
+        <div>
+            <table class="table table.striped">
+                <thead>
+                    <tr>
+                        <th colspan="5"></th>
+                        <th colspan="8"> Curve Number and Associated Areas </th>
+                    </tr>
+                    <!--subcolumns of Curver Number and Associated Areas-->
+                    <tr>
+                        <th colspan="5">Cover Description</th>
+                        <th colspan="1">A</th>
+                        <th colspan="1">Area</th>
+                        <th colspan="1">B</th>
+                        <th colspan="1">Area</th>
+                        <th colspan="1">C</th>
+                        <th colspan="1">Area</th>
+                        <th colspan="1">D</th>
+                        <th colspan="1">Area</th>
+                        <th colspan="1"></th>
+                    </tr>
+                </thead>
 
-            <!--<thead>
-                <tr>
-                    <th rowspan="2"> </th>
-                    <th rowspan="6">Cover Description</th>
-                    <th rowspan="2">A</th>
-                    <th rowspan="2">B</th>
-                    <th rowspan="2">C</th>
-                    <th rowspan="2">D</th>
-                </tr>
-            </thead>-->
-            {% for item in session.cn_preference_1 %}
-                
+                {% for item in session.cn_preference_1 %}
+
                 <tr>
                     <td colspan="5">{{ covers[item][0] }}</td>
                     <td><div id="DA1">{{ covers[item][1] }}</div></td>
-                    <td> <input type="text" id="A1" size="3"></td>
+                    <td> <input type="text" id="A1" size="3" name="{{ item }}_area_A"></td>
                     <td><div id="DB1">{{ covers[item][2] }}</div></td>
-                    <td> <input type="text" id="B1" size="3"></td>
+                    <td> <input type="text" id="B1" size="3" name="{{ item }}_area_B"></td>
                     <td><div id="DC1">{{ covers[item][3] }}</div></td>
-                    <td> <input type="text" id="C1" size="3"></td>
+                    <td> <input type="text" id="C1" size="3" name="{{ item }}_area_C"></td>
                     <td><div id="DD1">{{ covers[item][4] }}</div></td>
-                    <td> <input type="text" id="D1" size="3"></td>
-                    <!--<td><div id="outputP1"></div></td>-->
+                    <td> <input type="text" id="D1" size="3" name="{{ item }}_area_D"></td>
+                    <td><div id="outputP1"></div></td>
                 </tr>
 
 
-            {% endfor %}
+                {% endfor %}
 
-        </table>
+            </table>
+        </div>
+
     </div>
-    </form>
-</div>
+
+    <div class="col-md-3">
+        <br />
+        <!--<div>
+            <input type="submit" class="btn btn-primary" name="disc_sel" value="Save pref. 1..." style="height:35px; width:150px">
+        </div>
+        <br />
+        <div>
+            <input type="submit" class="btn btn-primary" name="disc_sel" value="Save pref. 2..." style="height:35px; width:150px">
+        </div>
+        <br />
+        <div>
+            <input type="submit" class="btn btn-primary" name="disc_sel" value="Compute" style="height:35px; width:150px">
+        </div>-->
+        <div>
+            <input type="submit" class="btn btn-primary" name="disc_sel" value="Compute" style="height:35px; width:150px">
+        </div>
+        <br />
+        <div>
+            <a href="cn_preferences_edit" class="btn btn-primary" style="height:35px; width:150px">View / Edit prefs...</a>
+        </div>
+    </div>
+</form>
+
 {% endblock %}
 
