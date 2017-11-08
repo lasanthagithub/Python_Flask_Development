@@ -24,11 +24,16 @@ from MySQLdb import escape_string as thwart
 import dbhandle
 #from data import dbhandle
 from Cover_Descriptions import cover_discription
-
+from datetime import timedelta
 ## Instance of flask class
 app = Flask(__name__)
 
 
+## setting a timeout
+@app.before_request
+def make_session_permanent():
+    session.permanent = True
+    app.permanent_session_lifetime = timedelta(minutes=5)
 
 
 """
