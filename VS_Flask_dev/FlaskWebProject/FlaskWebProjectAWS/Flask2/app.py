@@ -25,15 +25,19 @@ import dbhandle
 #from data import dbhandle
 from Cover_Descriptions import cover_discription
 from datetime import timedelta
+import pandas as pd
+
+
+
 ## Instance of flask class
 app = Flask(__name__)
 
 
 ## setting a timeout
-@app.before_request
-def make_session_permanent():
-    session.permanent = True
-    app.permanent_session_lifetime = timedelta(minutes=5)
+########@app.before_request
+########def make_session_permanent():
+########    session.permanent = True
+########    app.permanent_session_lifetime = timedelta(minutes=5)
 
 
 """
@@ -153,6 +157,7 @@ def login():
         ## Get form fields
         username = request.form['username']
         password_candidate = request.form['password']
+
         try:
             ## Create a curser
             ## Get user by user name
@@ -164,12 +169,14 @@ def login():
         except:
             return('Eroor 404')
 
+
         if len(result) > 0:
             ## Get stored hash
             #data = cur.fetchone()
             #password = data['password']
             password = result[0][1]
 
+            
             ## compare passwords
             if sha256_crypt.verify(password_candidate, password):
                 ## if passed create a session
@@ -308,7 +315,12 @@ def cn_preference_1():
     ## Dict to save selections and values preference 1
 
     cn_pref_1_dict =  {}
+    cn_pref_1_list = []
+    cn_df = pd.DataFrame()
 
+    total_product = 0.0
+    total_area_B = 0.0
+    use_CN = 0.0
 
     if request.method == 'POST': 
         keys = request.form.keys()
@@ -317,10 +329,25 @@ def cn_preference_1():
             ## create a new dictionary with preference and their input values
             cn_pref_1_dict[item] = cover_dict[item] + request.form.getlist(item)
 
+            ## Calculations
             cn_area = (float(cn_pref_1_dict[item][1]) * float(cn_pref_1_dict[item][5])) + (float(cn_pref_1_dict[item][2]) * float(cn_pref_1_dict[item][6])) + (float(cn_pref_1_dict[item][3]) * float(cn_pref_1_dict[item][7])) + (float(cn_pref_1_dict[item][4]) * float(cn_pref_1_dict[item][8]))
+            
+            ## Append the calculated value to dict
             cn_pref_1_dict[item] = cn_pref_1_dict[item] + [round(cn_area, 4)]
+            cn_pref_1_list.append(([item] + cn_pref_1_dict[item]))
 
-        return render_template('cn_view_calc_results.html', cn_pref = cn_pref_1_dict)
+            total_product += cn_area
+            total_area_B += float(cn_pref_1_dict[item][6])
+        
+        if total_area_B != 0:
+            use_CN = round(total_product/total_area_B)
+        else:
+            use_CN = 'NA'
+            
+        cn_df = pd.DataFrame(cn_pref_1_list, columns=['cover_ID', 'cover_disc', 'A', 'A_area', 'B', 'B_area', 'C', 'C_area', 'D', 'D_area', 'tot_CN_x_area' ])
+
+
+        return render_template('cn_view_calc_results.html', cn_pref = cn_pref_1_dict, CN_values = [round(total_product,3), round(total_area_B, 3), use_CN])
 
     return render_template('cn_preference_1.html', covers = cover_dict)
 

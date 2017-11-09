@@ -4,47 +4,55 @@
 <div class="col-md-7">
     
     
-<table class="table table.striped">
-    <thead>
+    <table class="table table.striped">
+        <thead>
+            <tr>
+                <th colspan="5"></th>
+                <th colspan="8"> Curve Number and Associated Areas </th>
+            </tr>
+            <!--subcolumns of Curver Number and Associated Areas-->
+            <tr>
+                <th colspan="5">Cover Description</th>
+                <th colspan="1">A</th>
+                <th colspan="1">Area</th>
+                <th colspan="1">B</th>
+                <th colspan="1">Area</th>
+                <th colspan="1">C</th>
+                <th colspan="1">Area</th>
+                <th colspan="1">D</th>
+                <th colspan="1">Area</th>
+                <th colspan="1">CN x Area</th>
+            </tr>
+        </thead>
+
+        {% for key, item in cn_pref.items() %}
+
+
         <tr>
-            <th colspan="5"></th>
-            <th colspan="8"> Curve Number and Associated Areas </th>
+            <td colspan="5">{{ item[0] }}</td>
+            <td><div>{{ item[1] }}</div></td>
+            <td><div>{{ item[5] }}</div></td>
+            <td><div>{{ item[2] }}</div></td>
+            <td><div>{{ item[6] }}</div></td>
+            <td><div>{{ item[3] }}</div></td>
+            <td><div>{{ item[7] }}</div></td>
+            <td><div>{{ item[4] }}</div></td>
+            <td><div>{{ item[8] }}</div></td>
+            <td><div>{{ item[9] }}</div></td>
+
         </tr>
-        <!--subcolumns of Curver Number and Associated Areas-->
-        <tr>
-            <th colspan="5">Cover Description</th>
-            <th colspan="1">A</th>
-            <th colspan="1">Area</th>
-            <th colspan="1">B</th>
-            <th colspan="1">Area</th>
-            <th colspan="1">C</th>
-            <th colspan="1">Area</th>
-            <th colspan="1">D</th>
-            <th colspan="1">Area</th>
-            <th colspan="1">CN x Area</th>
-        </tr>
-    </thead>
 
-    {% for key, item in cn_pref.items() %}
+        {% endfor %}
 
 
-    <tr>
-        <td colspan="5">{{ item[0] }}</td>
-        <td><div>{{ item[1] }}</div></td>
-        <td><div>{{ item[5] }}</div></td>
-        <td><div>{{ item[2] }}</div></td>
-        <td><div>{{ item[6] }}</div></td>
-        <td><div>{{ item[3] }}</div></td>
-        <td><div>{{ item[7] }}</div></td>
-        <td><div>{{ item[4] }}</div></td>
-        <td><div>{{ item[8] }}</div></td>
-        <td><div>{{ item[9] }}</div></td>
 
-    </tr>
-
-    {% endfor %}
-
-</table>
+    </table>
+    <hr style="height:1px;border:none;color:#333;background-color:#333;"/>
+    <div>
+        <p><font size="4">Total Product (CN x area): {{ CN_values[0]}}</font></p>
+        <p><font size="4">Total Area (B): {{ CN_values[1]}}</font></p>
+        <p><font size="4">Use CN: {{ CN_values[2]}}</font></p>
+    </div>
 </div>
 
 <div class="col-md-3">
