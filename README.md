@@ -4,4 +4,4 @@ The website is under construction.
 
 You can access to the current development from following link!
 
-(Link to Python-Flask development)[http://54.172.66.46]
+[Link to Python-Flask development](http://54.172.66.46])
